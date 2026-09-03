@@ -9,6 +9,7 @@ This document maps the evidence used to build the clean public repository. It al
 | Source | Use | Public handling |
 |---|---|---|
 | Internal Notion hackathon notes | Competition narrative, phase constraints, internal records, lessons learned | Summarized only; raw export excluded |
+| Notion export: `Categories of Quantization Techniques` | Quantization taxonomy and out-of-scope filtering categories | Summarized in `technical-inventory.md`; raw ZIP and image excluded |
 | Exported PDF | Static reference for internal notes | Not included unless redacted and approved |
 | Local work folder | Discovery of scripts, experiments, datasets, and sensitive files | Selected clean documentation only |
 
@@ -41,6 +42,7 @@ If implementation evidence is needed, prefer:
 
 - `README.md`
 - `docs/competition-overview.md`
+- `docs/technical-inventory.md`
 - `docs/methodology.md`
 - `docs/experiments.md`
 - `docs/reproducibility.md`

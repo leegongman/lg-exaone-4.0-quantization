@@ -14,16 +14,18 @@ Important model-level considerations included:
 
 ## Quantization Tracks
 
-The explored quantization tracks included:
+The explored quantization tracks included broad schema and hyperparameter sweeps, not only one-off baseline runs.
 
 - GPTQ baseline experiments
 - AWQ baseline experiments
 - SmoothQuant-style scaling attempts
 - OmniQuant adaptation attempts
-- NVFP4 and lower-precision exploration
+- AutoRound, INT, FP8, NVFP4, RTN, HQQ, GGUF/GGML, and lower-precision exploration
 - FP16 skip or mixed-precision ideas
 
 These tracks should be described as experiments unless there is direct evidence linking a specific method to an official competition score.
+
+Detailed classification is maintained in `technical-inventory.md`.
 
 ## Fine-Tuning Track
 
@@ -46,6 +48,7 @@ Reviewed public evidence includes:
 - SmoothQuant-style model integration experiments
 - OmniQuant/vLLM adaptation documentation
 - Runtime and wheel-build notes in reviewed repositories
+- Custom wheel packaging and submission-path investigation
 
 Full upstream vLLM and OmniQuant source trees are intentionally excluded from the clean repository. Where useful, the public repo should keep patch-level references or links to reviewed commits/docs.
 
@@ -60,4 +63,3 @@ Original project claims should be limited to:
 - Reproducibility and postmortem documentation
 
 The repository should not claim ownership of upstream vLLM, OmniQuant, or other external research implementations.
-

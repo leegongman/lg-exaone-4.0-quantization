@@ -10,7 +10,7 @@ This repository is a curated portfolio version of the work. It does not include 
 |---|---|
 | Project | LG Aimers AI Hackathon lightweight LLM optimization study |
 | Target model | `EXAONE-4.0-1.2B` |
-| Main themes | Quantization, fine-tuning, model analysis, vLLM compatibility |
+| Main themes | Quantization sweeps, fine-tuning, model analysis, vLLM compatibility |
 | Public scope | Documentation, selected methodology, source map, reproducibility notes |
 | Excluded scope | Private data, credentials, checkpoints, wheels, full vLLM/OmniQuant trees |
 
@@ -31,9 +31,9 @@ The project investigated how to reduce model size and improve inference efficien
 The work covered:
 
 - EXAONE 4.0 1.2B architecture analysis
-- GPTQ and AWQ baseline experiments
-- SmoothQuant-style and OmniQuant adaptation attempts
-- NVFP4 and mixed-precision exploration
+- GPTQ, AWQ, AutoRound, INT, FP8/NVFP4, RTN/HQQ/GGUF-style experiment tracks
+- SmoothQuant-style, OmniQuant, and outlier-redistribution adaptation attempts
+- broad schema and hyperparameter sweeps across bit-width, group/block size, calibration, ignored modules, and target layers
 - LoRA fine-tuning and dataset-format experiments
 - vLLM model registration and runtime compatibility work
 - Local benchmark and latency-oriented evaluation scripts
@@ -44,6 +44,7 @@ The work covered:
 README.md
 docs/
   competition-overview.md
+  technical-inventory.md
   methodology.md
   experiments.md
   reproducibility.md
