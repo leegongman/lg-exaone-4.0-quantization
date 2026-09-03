@@ -1,0 +1,83 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# OS/editor
+.DS_Store
+.idea/
+.vscode/
+
+# Build outputs
+build/
+dist/
+*.egg-info/
+*.whl
+
+# Logs and caches
+logs/
+log/
+*.log
+cache/
+.cache/
+*.cache
+wandb/
+mlruns/
+runs/
+outputs/
+lightning_logs/
+huggingface/
+
+# Data and model artifacts
+data/
+datasets/
+artifacts/
+checkpoints/
+models/
+*.csv
+*.tsv
+*.jsonl
+*.parquet
+*.arrow
+*.pkl
+*.npy
+*.npz
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.zip
+*.tar
+*.tar.gz
+*.7z
+*.rar
+*.zst
+*.gguf
+*.onnx
+*.html
+*.pdf
+
+# Private exports and credentials
+notion-export/
+secret/
+secrets/
+*.env
+.env
+.env.*
+*token*
+*credential*
+*.pem
+*.key
