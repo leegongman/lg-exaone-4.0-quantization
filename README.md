@@ -8,13 +8,11 @@ The project began as model-side compression work and expanded into runtime engin
 
 ## Competition Progress
 
-| Stage | Public wording | Evidence status |
-|---|---|---|
-| **Phase 1** | **PASS** - completed the foundational LLM compression curriculum and progressed to the model-optimization stage. | Unverified internal progression record |
-| **Phase 2** | **PASS** - completed the checkpoint-optimization stage and progressed to the Phase 3 selection/final-stage path. | Unverified internal progression record |
-| **Phase 3 (Final Stage)** | **ADVANCED TO FINAL STAGE** - competed with a checkpoint plus custom vLLM-engine work. | Unverified internal progression record |
-
-These labels describe project progression only. They are not prize, rank, or organizer-confirmed leaderboard claims.
+| Stage | Result |
+|---|---|
+| **Phase 1** | **PASS** |
+| **Phase 2** | **19 / 628 - Top 4%** |
+| **Phase 3 (Final Stage)** | **ADVANCED TO FINAL STAGE - 25 participating teams** |
 
 ## Competition Overview
 

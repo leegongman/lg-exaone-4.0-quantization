@@ -58,8 +58,9 @@ The public repository must not include:
 
 | Claim | Evidence source | Status | Public wording |
 |---|---|---|---|
-| Phase 2 rank | Notion/PDF; official leaderboard not yet attached | unverified internal record | Internal note fields record a Phase 2 ranking; this is pending official public verification. |
-| Phase 3 rank | Notion/PDF; official leaderboard not yet attached | unverified internal record | Internal note fields record a Phase 3 ranking; this is pending official public verification. |
+| Phase 2 rank | Internal postmortem PDF and team record; official leaderboard not yet attached | unverified internal record | Internal records state Phase 2 rank `19/628` (presented as Top 4% in the README); official public verification is pending. |
+| Phase 3 rank | Internal notes/PDF; official leaderboard not yet attached | unverified internal record | A Phase 3 rank is retained internally but intentionally omitted from public-facing README wording. |
+| Phase 3 field size | Project-owner clarification; organizer result page not attached | unverified internal record | The README states final-stage advancement with 25 participating teams; this count remains an internal record until independently verified. |
 | Phase 1 progression | Internal postmortem PDF; organizer progression evidence not attached | unverified internal record | The postmortem describes completion of the Phase 1 foundational curriculum and progression to model optimization. |
 | Phase progression | Internal records plus official phase descriptions; official outcome page not yet attached | unverified internal record | Internal records describe progression through earlier phases and participation in the Phase 3 final-stage track. This is not a prize or verified leaderboard claim. |
 | Phase 2 score weighting | Internal postmortem PDF; organizer formula not attached | unverified internal record | The postmortem records `5 x accuracy + 5 x speed`; this is included as an internal evaluation record, not an official formula. |
