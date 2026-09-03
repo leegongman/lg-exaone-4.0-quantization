@@ -37,8 +37,7 @@ The following are intentionally excluded:
 - Quantized checkpoints
 - Tokenizer/model artifact directories
 - Wheel files
-- Full vLLM source tree
-- Full OmniQuant source tree
+- The standalone `leegongman/vllm` fork and its Git history
 - Notebook outputs
 - Raw Notion exports
 - Large caches and logs
@@ -61,6 +60,8 @@ The `environment.md` file in this draft is a reference note only. It is not an i
 ## Patch Reproduction Boundary
 
 The patch packages under [`patches/`](../patches/README.md) are intended to preserve implementation deltas, not to provide an installable runtime. Each adjacent README names its exact upstream base revision, source snapshot, applicable upstream license, and excluded artifacts. Applying a patch requires a separately prepared compatible upstream checkout, dependencies, and a user-provided EXAONE model artifact.
+
+The [`sources/`](../sources/README.md) directory retains source-only snapshots from the other former repositories. They preserve code provenance but are not one combined dependency graph or one-command environment.
 
 ## Local vLLM Timing
 

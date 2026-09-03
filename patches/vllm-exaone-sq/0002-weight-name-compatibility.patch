@@ -1,0 +1,35 @@
+diff --git a/vllm/model_executor/models/exaone_refactoring.py b/vllm/model_executor/models/exaone_refactoring.py
+index 3d4ca54..c4fb5eb 100644
+--- a/vllm/model_executor/models/exaone_refactoring.py
++++ b/vllm/model_executor/models/exaone_refactoring.py
+@@ -58,15 +58,15 @@ class IdentityWithParam(nn.Module):
+     """Identity transform with a learnable per-channel smooth factor.
+ 
+     Used as pre-attention / pre-feedforward scaling layer for SmoothQuant.
+-    The smooth_factor is loaded from the checkpoint as a plain parameter.
++    The weight is loaded from the checkpoint as a plain parameter.
+     """
+ 
+     def __init__(self, hidden_size: int) -> None:
+         super().__init__()
+-        self.smooth_factor = nn.Parameter(torch.ones(hidden_size))
++        self.weight = nn.Parameter(torch.ones(hidden_size))
+ 
+     def forward(self, hidden_states: torch.Tensor) -> torch.Tensor:
+-        return hidden_states * self.smooth_factor
++        return hidden_states * self.weight
+ 
+ 
+ # ---------------------------------------------------------------------------
+@@ -438,11 +438,6 @@ class Exaone4ModelSQ(nn.Module):
+                 # --- plain weights (including smooth_factor) ---
+                 if name.endswith(".bias") and name not in params_dict:
+                     continue
+-                # Remap checkpoint key: pre_*_identity.weight -> .smooth_factor
+-                name = name.replace(".pre_attention_identity.weight",
+-                                    ".pre_attention_identity.smooth_factor")
+-                name = name.replace(".pre_feedforward_identity.weight",
+-                                    ".pre_feedforward_identity.smooth_factor")
+                 name = maybe_remap_kv_scale_name(name, params_dict)
+                 if name is None:
+                     continue

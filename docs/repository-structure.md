@@ -55,6 +55,15 @@ patches/
     README.md
     legacy/omni_activation_real.py
   vllm-exaone-sq-reference.md
+sources/
+  README.md
+  scheme_vLLM_omniquant/
+  CP/
+  EXAONE_Quantization_method/
+  vLLM_Speed/
+  vLLM_FP16_skip/
+  vLLM_OmniQuant/
+  vllm-exaone-sq/
 schemas/
   README.md
   experiment-manifest.schema.json
@@ -84,6 +93,7 @@ The directory guides establish stable homes for reviewed public content and futu
 | `examples/` | Small runnable or conceptual examples | No credentials, private data, checkpoints, or wheels |
 | `experiments/` | Sanitized experiment manifests and result summaries | Includes a score-free GPTQ manifest example; every metric must state whether it is official, internal, local, failed, partial, or exploratory |
 | `patches/` | License-attributed EXAONE OmniQuant and vLLM source deltas, plus provenance records | Exact upstream base, source revision, license, and exclusions are required; no full upstream tree |
+| `sources/` | Source-only archive grouped by former repository | Tracked code, configs, tests, examples, and text documentation under 1 MiB; no data, weights, wheels, notebooks, output, credentials, or images |
 | `schemas/` | Versioned schemas for public manifests/configs | Includes a sanitized experiment-manifest schema; metadata only, no submission payloads or secrets |
 | `scripts/` | Cleaned helper scripts | Includes synthetic-prompt local timing only; no DACON API/token code, local absolute paths, generated datasets, or copied upstream sources |
 | `techniques/` | Method-specific notes | Contains project-owned method summaries that link to evidence and distinguish implementation from research review |
@@ -98,7 +108,7 @@ The directory guides establish stable homes for reviewed public content and futu
 
 The following must not be recreated in this repository:
 
-- Full vLLM or OmniQuant source trees
+- The standalone `leegongman/vllm` fork and Git histories from former repositories
 - DACON token/API helpers and submission payloads
 - Checkpoints, model weights, tokenizers, wheels, or caches
 - Raw notebooks, notebook outputs, and raw Notion export trees

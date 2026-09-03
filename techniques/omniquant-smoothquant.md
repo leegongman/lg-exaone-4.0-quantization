@@ -2,7 +2,7 @@
 
 ## Status
 
-**Adaptation and implementation evidence reviewed.** OmniQuant and SmoothQuant are external methods. This project records EXAONE-specific experiments and vLLM compatibility work; it does not claim ownership of the original methods or distribute their full source trees.
+**Adaptation and implementation evidence reviewed.** OmniQuant and SmoothQuant are external methods. This project records EXAONE-specific experiments and vLLM compatibility work; it does not claim ownership of the original methods. Source-only historical snapshots are retained with their upstream licenses under [`sources/`](../sources/README.md).
 
 ## OmniQuant Adaptation
 
@@ -16,13 +16,13 @@ The reviewed evidence covers an OmniQuant path with the following technical dime
 | Activation handling | Activation scale/shift generation and calibration-dataset changes |
 | Runtime | Packed low-bit representation, config/checkpoint preparation, vLLM loading compatibility, and custom-wheel investigation |
 
-The original local OmniQuant directory identifies [OpenGVLab OmniQuant](https://github.com/OpenGVLab/OmniQuant) as its upstream source. The full upstream tree, its notebooks, checkpoints, and example data remain excluded from this repository.
+The original local OmniQuant directory identifies [OpenGVLab OmniQuant](https://github.com/OpenGVLab/OmniQuant) as its upstream source. Filtered source-only snapshots are retained under [`sources/`](../sources/README.md); notebooks, checkpoints, example data, images, and upstream Git history remain excluded.
 
 ## SmoothQuant-Style Work
 
 The local work included SmoothQuant combinations with GPTQ, AWQ, and integer/FP8-style paths. A separate runtime path added hidden-state scaling modules before attention and MLP computation in a custom EXAONE decoder model path.
 
-The public implementation evidence includes a focused, Apache-2.0-attributed [EXAONE SmoothQuant model-path patch](../patches/vllm-exaone-sq/README.md), its companion [commit reference](../patches/vllm-exaone-sq-reference.md), and the MIT-attributed [EXAONE OmniQuant adaptation patch](../patches/omniquant-exaone/README.md). These preserve only the relevant deltas, not complete vLLM or OmniQuant source trees.
+The public implementation evidence includes a focused, Apache-2.0-attributed [EXAONE SmoothQuant model-path patch](../patches/vllm-exaone-sq/README.md), its companion [commit reference](../patches/vllm-exaone-sq-reference.md), the MIT-attributed [EXAONE OmniQuant adaptation patch](../patches/omniquant-exaone/README.md), and filtered source snapshots under [`sources/`](../sources/README.md). The patches remain the clearest view of project-specific changes.
 
 ## Claim Boundary
 

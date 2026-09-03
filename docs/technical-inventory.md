@@ -197,4 +197,4 @@ The following are evidence sources or artifacts, not public repo contents:
 - DACON JSON exports, pages, tokens, API scripts, and submission artifacts
 - raw JSONL datasets and generated training data
 - checkpoint, model, tokenizer, wheel, cache, and notebook-output files
-- full upstream vLLM, OmniQuant, AWQ, or other source trees
+- the standalone `leegongman/vllm` fork, complete Git histories, and unreviewed external source trees

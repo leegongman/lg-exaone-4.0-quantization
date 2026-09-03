@@ -171,11 +171,11 @@ The custom runtime work went beyond an external vLLM invocation. Reviewed projec
 5. Preserved the post-attention and post-feedforward norms while handling the original checkpoint's `input_layernorm` weights according to the custom loader path.
 6. Investigated EXAONE registration and LET/LWC-oriented OmniQuant adaptation, vLLM quantization-config parsing, and CUDA-kernel/config work as internal implementation efforts.
 
-The critical distinction is architectural: these are **new hidden-state scaling modules inside the custom decoder path**, not extra Transformer blocks or an unsupported claim of ownership of vLLM/SmoothQuant. The implementation evidence is linked in [docs/source-map.md](docs/source-map.md); the full vLLM tree is intentionally excluded.
+The critical distinction is architectural: these are **new hidden-state scaling modules inside the custom decoder path**, not extra Transformer blocks or an unsupported claim of ownership of vLLM/SmoothQuant. The implementation evidence and source attribution are linked in [docs/source-map.md](docs/source-map.md).
 
 ## Repository Guide
 
-The source-selection rules for the project's prior EXAONE and vLLM repositories are documented in [file-selection-plan.md](docs/file-selection-plan.md). The reviewed EXAONE/OmniQuant and vLLM implementation deltas are preserved as focused, attributed patches rather than copied source trees; [repository-consolidation.md](docs/repository-consolidation.md) records exactly how each former repository is represented.
+The source-selection rules for the project's prior EXAONE and vLLM repositories are documented in [file-selection-plan.md](docs/file-selection-plan.md). Public-safe source snapshots are retained under [`sources/`](sources/README.md), while focused EXAONE/vLLM implementation deltas remain available as attributed patches. [repository-consolidation.md](docs/repository-consolidation.md) records exactly how each former repository is represented.
 
 ```text
 docs/          Competition rules, architecture, experiments, evidence, and safety
@@ -183,6 +183,7 @@ techniques/    Method-specific notes with evidence and attribution
 configs/       Sanitized configuration examples
 experiments/   Future sanitized manifests and local benchmark summaries
 patches/       License-attributed EXAONE/OmniQuant and vLLM source deltas
+sources/       Source-only archive grouped by former repository
 scripts/       Cleaned helpers without private paths, data, or credentials
 ```
 
@@ -194,11 +195,12 @@ scripts/       Cleaned helpers without private paths, data, or credentials
 - [File selection plan](docs/file-selection-plan.md): admission rules for prior EXAONE/vLLM repositories and permanent exclusions.
 - [Repository consolidation](docs/repository-consolidation.md): former-repository commits, preserved changes, and exclusions.
 - [Patches](patches/README.md): the focused source deltas and exact upstream bases.
+- [Source archive](sources/README.md): retained source, config, test, example, and documentation files from the former repositories.
 - [Third-party licenses](THIRD_PARTY_LICENSES.md): upstream licenses applicable to patch files.
 - [Source map](docs/source-map.md): upstream attribution and the public include/exclude manifest.
 
 ## Public Safety and Attribution
 
-This repository excludes DACON tokens, private datasets, generated JSONL, checkpoints, tokenizer/model artifacts, submission files, wheels, raw Notion exports, notebook outputs, local caches, and full vLLM/OmniQuant source trees. The DACON token found in the original workspace must be revoked or rotated before any related history is shared.
+This repository excludes DACON tokens, private datasets, generated JSONL, checkpoints, tokenizer/model artifacts, submission files, wheels, raw Notion exports, notebook outputs, local caches, and the standalone `leegongman/vllm` fork. Source-only snapshots from the other reviewed repositories are retained under `sources/` after artifact and credential filtering. The DACON token found in the original workspace must be revoked or rotated before any related history is shared.
 
 vLLM, OmniQuant, GPTQ, AWQ, and other methods/frameworks remain attributed to their original authors. This repository claims only the evidence-backed EXAONE-specific analysis, experiment design, runtime integration, selected custom model-path changes, and documentation.

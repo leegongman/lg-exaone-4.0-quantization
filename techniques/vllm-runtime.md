@@ -23,8 +23,7 @@ The included [`scripts/benchmark_vllm_tpt.py`](../scripts/benchmark_vllm_tpt.py)
 
 ## Excluded Material
 
-- Full vLLM source tree and build system
-- Full OmniQuant source tree
+- The standalone `leegongman/vllm` fork and complete Git histories
 - Wheels, checkpoints, packed weights, and cache directories
 - Competition submission payloads and organizer runtime files
 - Private evaluation inputs and raw timing logs

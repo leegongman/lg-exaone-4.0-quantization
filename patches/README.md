@@ -1,6 +1,6 @@
 # Patches and References
 
-This directory preserves the project's focused EXAONE/vLLM/OmniQuant code deltas without vendoring a full upstream source tree.
+This directory preserves the project's focused EXAONE/vLLM/OmniQuant code deltas. Filtered source-only snapshots are separately retained under [`../sources/`](../sources/README.md).
 
 | Directory | Scope | Base and license |
 |---|---|---|

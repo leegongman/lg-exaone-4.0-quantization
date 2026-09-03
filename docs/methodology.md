@@ -76,7 +76,7 @@ Reviewed public evidence includes:
 - Custom wheel packaging and submission-path investigation
 - editable-install and build-environment notes from local/Notion records
 
-Full upstream vLLM and OmniQuant source trees are intentionally excluded from the clean repository. Where useful, the public repo should keep patch-level references or links to reviewed commits/docs.
+The standalone `leegongman/vllm` fork remains excluded. Filtered source-only snapshots from the other reviewed repositories are retained under [`../sources/`](../sources/README.md), while patch packages identify the most relevant EXAONE-specific deltas.
 
 ## Attribution Boundary
 
