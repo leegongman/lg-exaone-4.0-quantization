@@ -9,6 +9,7 @@ This file documents the focused EXAONE/vLLM customization evidence without vendo
 | Item | Source | Observed purpose |
 |---|---|---|
 | EXAONE SQ model path | [`d0d38db`](https://github.com/leegongman/vllm/commit/d0d38db63090185dfb8ca131def8d04146de9e5e) | Adds an `Exaone4ForCausalLMSQ` model path, identity modules for smooth-factor handling, and model-registry support. |
+| Checkpoint-key remap | [`a57dca9`](https://github.com/leegongman/vllm/commit/a57dca9a83cf25d14be6a78f72d2ea028e0ccb1b) | Remaps `pre_*_identity.weight` keys to the preceding `smooth_factor` parameter name. |
 | Checkpoint-name compatibility fix | [`d8fe813`](https://github.com/leegongman/vllm/commit/d8fe813d6715869fa85471e5a3d3631c599b7e72) | Aligns the identity-module parameter name with the checkpoint naming expectation. |
 
 ## Technical Boundary

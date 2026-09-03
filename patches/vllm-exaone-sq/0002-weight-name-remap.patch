@@ -1,0 +1,16 @@
+diff --git a/vllm/model_executor/models/exaone_refactoring.py b/vllm/model_executor/models/exaone_refactoring.py
+index f7702b6..3d4ca54 100644
+--- a/vllm/model_executor/models/exaone_refactoring.py
++++ b/vllm/model_executor/models/exaone_refactoring.py
+@@ -438,6 +438,11 @@ class Exaone4ModelSQ(nn.Module):
+                 # --- plain weights (including smooth_factor) ---
+                 if name.endswith(".bias") and name not in params_dict:
+                     continue
++                # Remap checkpoint key: pre_*_identity.weight -> .smooth_factor
++                name = name.replace(".pre_attention_identity.weight",
++                                    ".pre_attention_identity.smooth_factor")
++                name = name.replace(".pre_feedforward_identity.weight",
++                                    ".pre_feedforward_identity.smooth_factor")
+                 name = maybe_remap_kv_scale_name(name, params_dict)
+                 if name is None:
+                     continue

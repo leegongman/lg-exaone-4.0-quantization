@@ -12,7 +12,7 @@ This directory retains the public-safe source, configuration, and documentation 
 | `vLLM_OmniQuant` | `7c96a51b71d62c6a19fd99b8a06c59d932df6566` | 6 | less than 0.1 MiB |
 | `vllm-exaone-sq` | `17411cee9275e317b6674c8190c2a88cd4a56e46` | 4,115 | 36.7 MiB |
 
-The standalone `leegongman/vllm` fork is not archived here. Its two EXAONE-specific commits are preserved as focused patches under [`../patches/vllm-exaone-sq/`](../patches/vllm-exaone-sq/).
+The standalone `leegongman/vllm` fork is not archived here. Its three EXAONE-specific commits (`d0d38db`, `a57dca9`, and `d8fe813`) are preserved as focused patches under [`../patches/vllm-exaone-sq/`](../patches/vllm-exaone-sq/).
 
 ## Filtering Rule
 

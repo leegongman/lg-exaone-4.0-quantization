@@ -44,7 +44,7 @@ This document maps the evidence used to build the clean public repository. It al
 | `sources/` | Seven reviewed former repositories | Public-safe source, configuration, test, example, and text-documentation archive grouped by original repository; see [`sources/README.md`](../sources/README.md) |
 | `patches/omniquant-exaone/` | `CP` source snapshot; duplicate evidence from `scheme_vLLM_omniquant` and `EXAONE_Quantization_method`; OpenGVLab OmniQuant base | Minimal EXAONE OmniQuant delta, plus the earlier `vLLM_Speed` layer revision; source-only snapshots retained separately under `sources/` |
 | `patches/vllm-omni-activation-real/` | `CP` source snapshot and reviewed `vLLM_OmniQuant` wheel archive; vLLM `v0.14.1` base | Minimal vLLM activation-real runtime delta; source-only snapshots retained separately, wheel excluded |
-| `patches/vllm-exaone-sq/` | [EXAONE SQ registration commit](https://github.com/leegongman/vllm/commit/d0d38db63090185dfb8ca131def8d04146de9e5e), [weight-name fix](https://github.com/leegongman/vllm/commit/d8fe813d6715869fa85471e5a3d3631c599b7e72), and reviewed `vllm-exaone-sq` snapshot | Minimal `Exaone4ForCausalLMSQ` model-path and compatibility deltas; standalone fork excluded |
+| `patches/vllm-exaone-sq/` | [EXAONE SQ registration commit](https://github.com/leegongman/vllm/commit/d0d38db63090185dfb8ca131def8d04146de9e5e), [weight-name remap](https://github.com/leegongman/vllm/commit/a57dca9a83cf25d14be6a78f72d2ea028e0ccb1b), [weight-name fix](https://github.com/leegongman/vllm/commit/d8fe813d6715869fa85471e5a3d3631c599b7e72), and reviewed `vllm-exaone-sq` snapshot | Minimal `Exaone4ForCausalLMSQ` model-path and compatibility deltas; standalone fork excluded |
 | `patches/vllm-fp16-skip/` | Reviewed `vLLM_FP16_skip` snapshot | Consolidation record plus a selected earlier `omni_activation_real` runtime source; no unverified FP16-skip implementation is asserted |
 | `patches/vllm-exaone-sq-reference.md` | [EXAONE SQ registration commit](https://github.com/leegongman/vllm/commit/d0d38db63090185dfb8ca131def8d04146de9e5e) and [weight-name fix commit](https://github.com/leegongman/vllm/commit/d8fe813d6715869fa85471e5a3d3631c599b7e72) | Companion provenance note for the source patch |
 | `techniques/*.md` | Local workspace, full Notion export, supplied PDF, and reviewed public repositories | Project-owned summaries of technical scope; each note distinguishes attempted, partial, exploratory, and external work |
@@ -98,7 +98,8 @@ The repository-specific eligibility and destination rules are maintained in [fil
 - `patches/vllm-omni-activation-real/0001-v0.14.1-omni-activation-real-runtime.patch`
 - `patches/vllm-exaone-sq/README.md`
 - `patches/vllm-exaone-sq/0001-exaone-sq-model-path.patch`
-- `patches/vllm-exaone-sq/0002-weight-name-compatibility.patch`
+- `patches/vllm-exaone-sq/0002-weight-name-remap.patch`
+- `patches/vllm-exaone-sq/0003-smooth-factor-to-weight.patch`
 - `patches/vllm-fp16-skip/README.md`
 - `patches/vllm-fp16-skip/legacy/omni_activation_real.py`
 - `patches/licenses/OmniQuant-MIT.txt`
