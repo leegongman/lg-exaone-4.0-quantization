@@ -26,13 +26,15 @@ flowchart TD
 
     subgraph STACK[30 decoder blocks: model.layers.0 ... model.layers.29]
         direction TB
-        L0[Residual stream] --> N1[Normalization]
-        N1 --> QKV[Self-attention projections: q_proj / k_proj / v_proj]
+        L0[Residual stream] --> QKV[Self-attention projections: q_proj / k_proj / v_proj]
+        L0 -. Phase 3 custom only .-> PREA[pre_attention_identity]
+        PREA --> QKV
         QKV --> QKN[QK RMSNorm-aware handling]
         QKN --> ATTN[Attention and o_proj]
         ATTN --> R1[Residual add]
-        R1 --> N2[Normalization]
-        N2 --> MLP[MLP projections: gate_proj / up_proj / down_proj]
+        R1 --> MLP[MLP projections: gate_proj / up_proj / down_proj]
+        R1 -. Phase 3 custom only .-> PREF[pre_feedforward_identity]
+        PREF --> MLP
         MLP --> R2[Residual add]
     end
 
@@ -46,7 +48,8 @@ flowchart TD
     QCFG --> W8[W8 or protected target groups]
 
     VLLM[Custom vLLM EXAONE registration] -. model loading / compatible checkpoints .-> STACK
-    SQ[SmoothQuant-style IdentityWithParam path] -. parameter-name / scale handling .-> QKV
+    SQ[SmoothQuant-style IdentityWithParam path] -. per-channel hidden-state scaling .-> PREA
+    SQ -. per-channel hidden-state scaling .-> PREF
 ```
 
 ## Layer-Specific Quantization Configuration
@@ -66,10 +69,12 @@ This configuration-level layer mapping is the basis for the repository's referen
 Reviewed public commits in the project vLLM fork provide implementation evidence for:
 
 - registering an `Exaone4ForCausalLMSQ` model path;
-- adding SmoothQuant-style `IdentityWithParam` handling in the EXAONE model path; and
+- creating `Exaone4DecoderLayerWithPreIdentity` for the custom EXAONE decoder path;
+- adding `IdentityWithParam`, a per-channel learnable `smooth_factor`, before self-attention and before the MLP in each custom decoder layer;
+- retaining post-attention and post-feedforward RMSNorm while the custom loader skips the original `input_layernorm` weights; and
 - aligning an expected smooth-factor parameter name with checkpoint weights.
 
-Those changes address runtime loading and checkpoint compatibility. They do not establish ownership of vLLM or SmoothQuant. The full vLLM tree is not copied here; see [source-map.md](source-map.md) for commit links and attribution.
+These are hidden-state scaling modules in the existing decoder path. They are not additional Transformer decoder blocks and do not establish ownership of vLLM or SmoothQuant. The full vLLM tree is not copied here; see [source-map.md](source-map.md) for commit links and attribution.
 
 ## Public Artifact Policy
 

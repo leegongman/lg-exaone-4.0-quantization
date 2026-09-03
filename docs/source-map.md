@@ -11,7 +11,7 @@ This document maps the evidence used to build the clean public repository. It al
 | Internal Notion hackathon notes | Notion links provided by the project owner; local full export ZIP reviewed | Competition narrative, phase constraints, internal records, lessons learned, technical taxonomy, checkpoint labels, attached-code inventory | Summarized only; raw export excluded |
 | Full Notion export ZIP | `3edca200-03b1-4e34-9b6d-23cfdfc0149d_ExportBlock-105ddcbe-7476-4d4c-8be0-6fa758dde4ac.zip`; 593 files in inner export | Full evidence inventory across Markdown pages, CSV tables, notebooks, scripts, configs, images, PDFs, and data files | Inventory summarized in `notion-export-inventory.md`; raw package excluded |
 | Notion export: `Categories of Quantization Techniques` | Page found inside Notion export and in earlier small export ZIP | Quantization taxonomy and out-of-scope filtering categories | Summarized in `technical-inventory.md`; raw ZIP and image excluded |
-| Exported PDF | `LGAimers.pdf` provided locally | Static reference for internal notes | Not included unless redacted and approved |
+| Exported PDF | `LGAimers.pdf` provided locally | Phase-by-phase postmortem, internal evaluation weighting record, vLLM/OmniQuant work summary, and lessons learned | Summarized with `unverified internal record` labels; PDF excluded |
 | Local work folder | Workspace file inventory and prior cleanup scans | Discovery of scripts, experiments, datasets, and sensitive files | Selected clean documentation only |
 
 ## Official Competition and Model References
