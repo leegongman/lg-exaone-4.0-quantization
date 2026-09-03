@@ -10,6 +10,7 @@ The same export includes 104 technical-note rows, 30 meeting-note rows, AWQ trac
 
 | Category | Evidence | Status | Public handling |
 |---|---|---|---|
+| EXAONE architecture and layer-target configuration | Reviewed local configuration, model-analysis notebooks, full Notion export | reviewed evidence | Document base architecture separately from W4/W8 per-layer and per-module targeting; do not claim base dimensions were redesigned |
 | GPTQ schema sweep | Full Notion export, local workspace, DACON memo exports, notes, public repo artifacts | Verified as attempted | Describe broad W4/W8, activation, block/group, calibration, sparse, KV, and target-layer sweeps; do not imply official score unless mapped |
 | AWQ schema sweep | Full Notion export, local workspace, DACON memo exports, notes | Verified as attempted | Describe W4/W8, tensor, sequence-length, config-group, ignore-layer, target-module, and internal-parameter variants |
 | SmoothQuant combinations | Full Notion export, local notebooks, public vLLM fork commits, notes | Verified as attempted | Attribute vLLM upstream separately; describe SQ+GPTQ, SQ+AWQ, SQ+INT8/FP8, and Pre-Identity combinations as experiments |
@@ -38,6 +39,12 @@ The following variants were observed in local notebooks, scripts, and internal s
 | Fine-tuning | LoRA notebooks, baseline fine-tuning notebook, short dataset, stacked-train attempts, deep dataset variants, CoT generation, phase-set variants, data collection/merge scripts, DeepSeek-style conversion scripts, GSM8K/MMLU/KMMLU-oriented data scripts, token-length filtering, phase-based dataset construction |
 | Knowledge distillation | Block distillation, teacher/student training setup, KD on layer-dropped model, drop-last/layer-drop variants |
 | Evaluation | `lm-eval` task runs, normalized speed/performance scoring scripts, throughput and token-latency scripts, HF and vLLM evaluation paths |
+
+## Architecture and Layer-Target Boundary
+
+A reviewed local quantized experiment configuration records the base EXAONE model as 30 decoder blocks with a 2048-wide hidden state, 4096-wide MLP intermediate layer, 32 query heads, and 8 KV heads. The experiment-specific modification lies in the selected targets, not a claimed rewrite of these base dimensions.
+
+Observed configuration patterns include layer-indexed Q/K/V and MLP projection selection, W4 groups with a recorded group size of 128, selected W8 target groups, and protected/omitted module choices. The detailed diagram and terminology are in [model-architecture.md](model-architecture.md).
 
 ## Internal Checkpoint Status Policy
 

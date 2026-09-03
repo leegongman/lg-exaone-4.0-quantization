@@ -14,6 +14,14 @@ This document maps the evidence used to build the clean public repository. It al
 | Exported PDF | `LGAimers.pdf` provided locally | Static reference for internal notes | Not included unless redacted and approved |
 | Local work folder | Workspace file inventory and prior cleanup scans | Discovery of scripts, experiments, datasets, and sensitive files | Selected clean documentation only |
 
+## Official Competition and Model References
+
+| Source | URL / Evidence | Use | Public handling |
+|---|---|---|---|
+| DACON Phase 2 | [competition description](https://dacon.io/competitions/official/236673/overview/description) | Official task framing, hidden evaluation, model-weight submission path, public-data allowance | Link and paraphrase only; no private score or leaderboard export included |
+| DACON Phase 3 | [competition description](https://dacon.io/competitions/official/236689/overview/description) | Final-stage eligibility, code-review context, model-engine/vLLM-wheel submission allowance | Link and paraphrase only; no private score or leaderboard export included |
+| EXAONE 4.0 1.2B | [Hugging Face model card](https://huggingface.co/LGAI-EXAONE/EXAONE-4.0-1.2B) | Canonical public model reference and loading context | Reference link only; weights and model artifacts excluded |
+
 ## Reviewed Public GitHub Sources
 
 | Repository | Reviewed | URL / Evidence | Use |
@@ -43,6 +51,7 @@ If implementation evidence is needed, prefer:
 
 - `README.md`
 - `docs/competition-overview.md`
+- `docs/model-architecture.md`
 - `docs/technical-inventory.md`
 - `docs/notion-export-inventory.md`
 - `docs/repository-structure.md`
@@ -54,6 +63,14 @@ If implementation evidence is needed, prefer:
 - `.gitignore`
 - `LICENSE`
 - `environment.md`
+- `assets/README.md`
+- `configs/README.md`
+- `examples/README.md`
+- `experiments/README.md`
+- `patches/README.md`
+- `schemas/README.md`
+- `scripts/README.md`
+- `techniques/README.md`
 - Optional cleaned scripts after review
 - Optional patch/reference files after license review
 

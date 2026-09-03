@@ -8,10 +8,10 @@ The project should be presented as a technical portfolio and postmortem, not as 
 
 ## Completed
 
-- EXAONE 4.0 1.2B lightweight optimization study
+- EXAONE 4.0 1.2B lightweight optimization study; Phase 1/2 passage and Phase 3 final-stage participation are recorded internally but await organizer evidence for public verification
 - Quantization method exploration across GPTQ, AWQ, SmoothQuant-style approaches, OmniQuant, and lower-precision variants
 - Technical inventory expansion from full Notion export, local notebooks/scripts, and internal submission memo labels
-- EXAONE structure and compatibility analysis
+- EXAONE structure, hidden-layer targeting, and compatibility analysis
 - vLLM customization investigation
 - Local benchmark and latency-oriented evaluation work
 - Source cleanup plan and public documentation draft
@@ -60,7 +60,9 @@ The public repository must not include:
 |---|---|---|---|
 | Phase 2 rank | Notion/PDF; official leaderboard not yet attached | unverified internal record | Internal note fields record a Phase 2 ranking; this is pending official public verification. |
 | Phase 3 rank | Notion/PDF; official leaderboard not yet attached | unverified internal record | Internal note fields record a Phase 3 ranking; this is pending official public verification. |
+| Phase progression | Internal records plus official phase descriptions; official outcome page not yet attached | unverified internal record | Internal records describe progression through earlier phases and participation in the Phase 3 final-stage track. This is not a prize or verified leaderboard claim. |
 | EXAONE quantization experiments | Local folder, reviewed GitHub repos, full Notion export, PDF | verified as attempted | Explored multiple quantization approaches for EXAONE 4.0 1.2B under vLLM-related constraints. |
+| EXAONE architecture and hidden-layer targeting | Reviewed local configuration, local model-analysis notebooks, full Notion export | reviewed evidence | Used layer-specific Q/K/V and MLP projection targeting with mixed-precision/protected-module variants; no base-architecture rewrite is claimed. |
 | Broad GPTQ/AWQ schema sweeps | Full Notion export, local notebooks, internal submission memo labels, user clarification | verified as attempted | Broad GPTQ and AWQ schema, internal-parameter, target-module, calibration, and hyperparameter sweeps were attempted. |
 | vLLM customization | Public vLLM fork commits, reviewed docs | implementation evidence reviewed | Reviewed public evidence documents EXAONE/vLLM integration experiments, including model-registration and quantization-compatibility work. |
 | Local benchmark | Full Notion export, local scripts, GitHub docs, experiment notes | partial | Local benchmark results were used for experiment comparison and are not reported as official competition scores. |

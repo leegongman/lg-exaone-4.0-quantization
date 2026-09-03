@@ -1,84 +1,80 @@
 # Repository Structure
 
-## Current Structure
+## Design Goal
 
-This repository is currently organized as a documentation-first public portfolio repo.
+This public repository follows a conventional research-project layout: durable documentation at the center, with separate directories for future configurations, techniques, experiments, scripts, examples, assets, schemas, and small patches. It is intentionally not a monolithic dump of the original workspace.
+
+The directory convention is informed by the structure of the project's [NVIDIA Nemotron reasoning repository](https://github.com/leegongman/nvidia-nemotron-reasoning), adapted for this project's safety boundary and attribution requirements.
+
+## Current Layout
 
 ```text
 README.md
+environment.md
+LICENSE
 docs/
   competition-overview.md
-  technical-inventory.md
-  notion-export-inventory.md
-  repository-structure.md
+  model-architecture.md
   methodology.md
   experiments.md
+  technical-inventory.md
+  notion-export-inventory.md
   reproducibility.md
   project-status.md
   source-map.md
-environment.md
-LICENSE
-```
-
-## File Roles
-
-| File | Role |
-|---|---|
-| `README.md` | First-screen project summary, status, scope, evidence policy, and attribution boundary |
-| `docs/competition-overview.md` | Competition phases, evaluation constraints, and official-vs-internal result language |
-| `docs/technical-inventory.md` | Full technical classification of model analysis, quantization, fine-tuning, evaluation, and vLLM work |
-| `docs/notion-export-inventory.md` | Inventory of the full Notion export used as evidence; no raw export content |
-| `docs/repository-structure.md` | Current and planned public repo layout |
-| `docs/methodology.md` | Project workflow and technical decision process |
-| `docs/experiments.md` | Experiment families, observed variants, and local-vs-competition result policy |
-| `docs/reproducibility.md` | What can and cannot be reproduced from the public repo |
-| `docs/project-status.md` | Claim status, publication risks, public claims table, and remaining actions |
-| `docs/source-map.md` | Source attribution, reviewed/unreviewed repositories, include/exclude manifest |
-| `environment.md` | Reference environment notes; not an install lockfile |
-| `LICENSE` | Public repository license |
-
-## Planned Future Structure
-
-These directories are intentionally not populated yet. They should be added only after the contained files are cleaned and reviewed.
-
-```text
-patches/
+  repository-structure.md
+assets/
   README.md
-  vllm-exaone-sq.patch
-  omniquant-vllm-adaptation.patch
-
-scripts/
+configs/
   README.md
-  evaluate_local.py
-  summarize_benchmark.py
-
-benchmarks/
-  README.md
-  local-benchmark-summary.md
-  environment-matrix.md
-
 examples/
   README.md
-  minimal-vllm-loading.md
-  quantization-config-examples.md
+experiments/
+  README.md
+patches/
+  README.md
+schemas/
+  README.md
+scripts/
+  README.md
+techniques/
+  README.md
 ```
 
-## Rules For Adding Files
+The directory guides are deliberate placeholders. They establish stable homes for reviewed public content without prematurely publishing code, model artifacts, or raw internal files.
 
-| Directory | Allowed content | Not allowed |
+## Directory Roles
+
+| Directory or file | Purpose | Admission rule |
 |---|---|---|
-| `patches/` | Small reviewed patches, commit references, license-compatible diffs | Full vLLM, OmniQuant, AWQ, or copied upstream trees |
-| `scripts/` | Cleaned scripts that run without private data, credentials, or local absolute paths | DACON token scripts, raw Notion code exports, notebooks with outputs |
-| `benchmarks/` | Sanitized local benchmark summaries with hardware, package versions, tasks, and method labels | Raw private scores, private test data, unlabelled competition claims |
-| `examples/` | Minimal examples using public references and placeholder paths | Model checkpoints, generated datasets, private submission files |
+| `README.md` | Project narrative, high-level technical coverage, status, and reading path | No unsupported score or ranking claims |
+| `environment.md` | Reference tool-family notes | Not an install lockfile; use pinned versions only after verification |
+| `docs/` | Evidence-based methodology, architecture, scope, status, and provenance | Link to sources and label evidence level |
+| `assets/` | Recreated public diagrams and sanitized figures | No screenshots with private or personally identifying information |
+| `configs/` | Minimal, sanitized configuration examples | No raw checkpoint/model/tokenizer configuration or private paths |
+| `examples/` | Small runnable or conceptual examples | No credentials, private data, checkpoints, or wheels |
+| `experiments/` | Sanitized experiment manifests and result summaries | Every metric must state whether it is official, internal, local, failed, partial, or exploratory |
+| `patches/` | Small license-reviewed diffs and commit references | No full vLLM, OmniQuant, AWQ, or other upstream tree |
+| `schemas/` | Versioned schemas for public manifests/configs | Metadata only; no submission payloads or secrets |
+| `scripts/` | Cleaned helper scripts | No DACON API/token code, local absolute paths, generated datasets, or copied upstream sources |
+| `techniques/` | Method-specific notes | Link to source/evidence and distinguish implementation from research review |
 
-## Public Naming Convention
+## Recommended Growth Order
 
-Use names that describe the method and evidence level:
+1. Add sanitized `techniques/` notes for GPTQ, AWQ, SmoothQuant, OmniQuant, LoRA, and vLLM integration.
+2. Add one `configs/` example only after it is reconstructed from safe public fields rather than copied from a checkpoint artifact.
+3. Add one `experiments/` manifest that captures method, target modules, calibration metadata, local hardware, and evidence status without scores or private data.
+4. Add small `patches/` references to the reviewed vLLM commits after license/base-revision metadata is recorded.
+5. Add cleaned `scripts/` only after a credential, path, data, and license scan.
 
-- `local-benchmark-*` for local benchmark summaries
-- `internal-record-*` for Notion/PDF/team records without official proof
-- `patch-*` or `*.patch` for small implementation references
-- `methodology-*` for documentation-only explanations
+## Excluded Structure
 
-Avoid filenames that imply official results unless the file contains organizer-confirmed evidence.
+The following must not be recreated in this repository:
+
+- Full vLLM or OmniQuant source trees
+- DACON token/API helpers and submission payloads
+- Checkpoints, model weights, tokenizers, wheels, or caches
+- Raw notebooks, notebook outputs, and raw Notion export trees
+- Private datasets, generated JSONL, raw CSV/XLSX, PDFs, screenshots, or leaderboard exports
+
+The exact include/exclude manifest is maintained in [source-map.md](source-map.md).

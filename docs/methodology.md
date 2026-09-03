@@ -1,16 +1,18 @@
 # Methodology
 
-## Model Analysis
+## Model Analysis and Layer Mapping
 
-The project began with structural analysis of `EXAONE-4.0-1.2B`. Internal notes indicate that the model did not map cleanly to several Llama-oriented quantization assumptions.
+The project began with structural analysis of `EXAONE-4.0-1.2B`. A reviewed experiment configuration records a 30-block `Exaone4ForCausalLM` decoder with hidden size 2048, intermediate size 4096, 32 query heads, 8 KV heads, and tied embeddings. Internal notes indicate that the model did not map cleanly to several Llama-oriented quantization assumptions.
 
 Important model-level considerations included:
 
-- Post-LN style behavior
-- QK RMSNorm-related handling
+- QK RMSNorm-related handling and Q/K/V projection layout
 - Layer-wise outlier and activation behavior
-- Tied embedding considerations
+- Tied embedding and `lm_head` protection considerations
 - Compatibility with vLLM model loading and quantized checkpoint formats
+- Per-layer target mapping for `q_proj`, `k_proj`, `v_proj`, `gate_proj`, `up_proj`, and `down_proj`
+
+The public claim is deliberately narrow: experiment configurations changed the **quantization targets and formats by hidden layer/module**, not EXAONE's published base layer count or hidden dimensions. See `model-architecture.md` for the diagram and configuration boundary.
 
 ## Quantization Tracks
 
@@ -68,7 +70,7 @@ The project included vLLM-side customization experiments for EXAONE compatibilit
 Reviewed public evidence includes:
 
 - EXAONE custom model registration work in a vLLM fork
-- SmoothQuant-style model integration experiments
+- SmoothQuant-style `IdentityWithParam` model integration and parameter-name alignment for checkpoint loading
 - OmniQuant/vLLM adaptation documentation
 - Runtime and wheel-build notes in reviewed repositories
 - Custom wheel packaging and submission-path investigation

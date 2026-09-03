@@ -51,7 +51,7 @@ Internal notes also indicate a first-pass filter that removed CNN, Vision Transf
 
 | Area | Techniques and variants | Claim level |
 |---|---|---|
-| EXAONE model analysis | Post-LN behavior, QK RMSNorm, tied embedding, layer/module mapping, activation outlier inspection, min/max/mean and layer-flow analysis | Internal notes and local notebooks |
+| EXAONE model analysis and layer mapping | 30-block decoder configuration, 2048 hidden size, 4096 MLP intermediate size, 32 query heads, 8 KV heads, QK RMSNorm, tied embedding, layer/module mapping, activation outlier inspection, min/max/mean and layer-flow analysis | Reviewed local configuration, internal notes, and local notebooks |
 | GPTQ | W4A16, W8A16, W8A8, W4A8, block-size variants, weight group-size variants, input-activation quantization variants, calibration-size variants, calibration-set variants, sparse 2:4 variants, KV-related variants, front-layer variants, late-layer mixed precision, selective module precision such as `down_proj`/`o_proj`, Marlin-kernel-related submission memo | Verified as attempted; not official score claim |
 | AWQ | W4A16, W8A16, W4A8, W8A8, W8A4, tensor variant, sequence-length 256/512 variants, prime variants, W4/W8 mixed recipes, W4+FP16 recipes, `lm_head` and `embed_tokens` exclusions, target-module mapping, config-group planning, internal-parameter adjustments | Verified as attempted; not official score claim |
 | SmoothQuant combinations | SQ+GPTQ, SQ+AWQ, SQ+INT8/FP8, W4A16/W8A16/W8A8-style variants, Pre-Identity integration, EXAONE layer-map compatibility investigation | Verified as attempted |
@@ -63,7 +63,7 @@ Internal notes also indicate a first-pass filter that removed CNN, Vision Transf
 | Fine-tuning | LoRA notebooks, baseline fine-tuning, short dataset, stacked train, phase datasets, DeepSeek-style formatting, deep dataset variants, CoT data generation, GSM8K/MMLU/KMMLU-oriented data scripts, Korean/English data categories, token-length filtering, data merging | Partial; raw data excluded |
 | Knowledge distillation | Block distillation, teacher/student setup, KD on layer-dropped model, layer-drop compression path | Partial; raw notebooks and generated data excluded |
 | Evaluation and scoring scripts | `lm-eval`, GSM8K, TruthfulQA, AIME, MMLU/KMMLU variants, HellaSwag, ARC Challenge, normalized speed/performance, throughput, token latency, HF/vLLM evaluation paths | Partial; local benchmark only |
-| vLLM customization | EXAONE custom model registration, SmoothQuant-style identity/smooth-factor integration, OmniQuant/vLLM runtime compatibility, loader/config investigation, custom wheel path | Implementation evidence reviewed |
+| vLLM customization | EXAONE custom model registration, `Exaone4ForCausalLMSQ`, SmoothQuant-style `IdentityWithParam`/smooth-factor integration, layer/module loading compatibility, OmniQuant/vLLM runtime compatibility, loader/config investigation, custom wheel path | Implementation evidence reviewed |
 | Submission packaging | vLLM-compatible checkpoint packaging, `save_compressed` paths, custom wheel packaging, DACON submission memo tracking | Internal record; raw submission files excluded |
 
 ## Technique Classification From Export
@@ -76,6 +76,7 @@ Internal notes also indicate a first-pass filter that removed CNN, Vision Transf
 | Module/layer targeting | attention vs MLP targeting, Q/K/V/O projection handling, gate/up/down projection handling, `lm_head`/embedding exclusion, front/back layer mapping | GPTQ/AWQ schema pages and AWQ parameter table |
 | Internal quantization hyperparameters | block size, group size, input activation granularity, static/dynamic activation handling, min/max and tensor/channel/token axes | GPTQ block-size/input-activation/weight-group YAML pages |
 | Runtime compatibility | vLLM quantization config parsing, custom model registration, EXAONE SmoothQuant model class, loader compatibility, wheel build/install | vLLM analysis/build pages and reviewed public commits/docs |
+| Hidden-layer configuration | Per-layer selection of Q/K/V and gate/up/down projections; W4/W8 target groups, group-size configuration, front/late-layer and protected-module variants | Reviewed local quantized experiment configuration and schema pages |
 | Fine-tuning and data | LoRA, PEFT-style workflow, dataset merge, DeepSeek-style conversion, short/deep/phase datasets, CoT generation | LoRA FT, KD/data pages, checkpoint labels |
 | Compression beyond PTQ | layer drop, block distillation, KD on dropped layers, sparse 2:4 | block distillation and sparse comparison pages |
 | Exploratory research survey | OmniQuant, ZeroQuant, OWQ, SpQR, SqueezeLLM, Slim-LLM, TurboQuant, SpinQuant, QuaRot | survey pages and selected experiment notes |
