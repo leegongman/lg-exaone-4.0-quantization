@@ -10,7 +10,7 @@ The project should be presented as a technical portfolio and postmortem, not as 
 
 - EXAONE 4.0 1.2B lightweight optimization study
 - Quantization method exploration across GPTQ, AWQ, SmoothQuant-style approaches, OmniQuant, and lower-precision variants
-- Technical inventory expansion from Notion taxonomy, local notebooks/scripts, and internal submission memo labels
+- Technical inventory expansion from full Notion export, local notebooks/scripts, and internal submission memo labels
 - EXAONE structure and compatibility analysis
 - vLLM customization investigation
 - Local benchmark and latency-oriented evaluation work
@@ -60,12 +60,13 @@ The public repository must not include:
 |---|---|---|---|
 | Phase 2 rank | Notion/PDF; official leaderboard not yet attached | unverified internal record | Internal note fields record a Phase 2 ranking; this is pending official public verification. |
 | Phase 3 rank | Notion/PDF; official leaderboard not yet attached | unverified internal record | Internal note fields record a Phase 3 ranking; this is pending official public verification. |
-| EXAONE quantization experiments | Local folder, reviewed GitHub repos, Notion/PDF | verified as attempted | Explored multiple quantization approaches for EXAONE 4.0 1.2B under vLLM-related constraints. |
-| Broad GPTQ/AWQ schema sweeps | Local notebooks, internal submission memo labels, user clarification | verified as attempted | Broad GPTQ and AWQ schema, target-module, calibration, and hyperparameter sweeps were attempted. |
+| EXAONE quantization experiments | Local folder, reviewed GitHub repos, full Notion export, PDF | verified as attempted | Explored multiple quantization approaches for EXAONE 4.0 1.2B under vLLM-related constraints. |
+| Broad GPTQ/AWQ schema sweeps | Full Notion export, local notebooks, internal submission memo labels, user clarification | verified as attempted | Broad GPTQ and AWQ schema, internal-parameter, target-module, calibration, and hyperparameter sweeps were attempted. |
 | vLLM customization | Public vLLM fork commits, reviewed docs | implementation evidence reviewed | Reviewed public evidence documents EXAONE/vLLM integration experiments, including model-registration and quantization-compatibility work. |
-| Local benchmark | Local scripts, GitHub docs, experiment notes | partial | Local benchmark results were used for experiment comparison and are not reported as official competition scores. |
-| LoRA fine-tuning | Local fine-tuning folder, Notion/PDF | partial | Explored LoRA fine-tuning and data preprocessing as an auxiliary optimization path; raw datasets are excluded. |
-| OmniQuant integration | Reviewed `scheme_vLLM_omniquant` documentation | verified documentation evidence | Documented OmniQuant adaptation attempts for EXAONE/vLLM; upstream OmniQuant code is attributed separately. |
+| Local benchmark | Full Notion export, local scripts, GitHub docs, experiment notes | partial | Local benchmark results were used for experiment comparison and are not reported as official competition scores. |
+| LoRA fine-tuning | Local fine-tuning folder, full Notion export, PDF | partial | Explored LoRA fine-tuning, data preprocessing, and dataset-format experiments as auxiliary optimization paths; raw datasets are excluded. |
+| Knowledge distillation and layer drop | Full Notion export, local notebooks, checkpoint labels | partial | Explored block distillation, KD on layer-dropped models, and drop-last variants as compression paths; raw notebooks/data are excluded. |
+| OmniQuant integration | Reviewed `scheme_vLLM_omniquant` documentation and full Notion export | implementation evidence reviewed | Documented OmniQuant adaptation attempts for EXAONE/vLLM; upstream OmniQuant code is attributed separately. |
 | Upstream vLLM usage | vLLM upstream and fork history | reviewed external dependency | vLLM was used as an external inference framework; upstream code is not claimed as original work. |
 | Upstream OmniQuant usage | OmniQuant-derived public repos and documentation | reviewed external dependency | OmniQuant was used as an external research baseline; upstream code and method ownership remain with the original authors. |
 | Inaccessible repos | `vLLM_OmniQuant`, `vllm-exaone-sq` | not reviewed | These repositories were not reviewed and are not used as evidence in this public cleanup. |

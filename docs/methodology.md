@@ -27,9 +27,32 @@ These tracks should be described as experiments unless there is direct evidence 
 
 Detailed classification is maintained in `technical-inventory.md`.
 
+## Sweep Axes
+
+The full Notion export indicates that the main quantization work varied multiple axes at the same time:
+
+- weight and activation bit-widths, including W4A16, W8A16, W8A8, W4A8, W8A4, INT8, FP8, FP8 block/dynamic, and NVFP4
+- block size, group size, calibration size, calibration-set version, sequence length, and input-activation quantization granularity
+- attention and MLP target modules, including Q/K/V/O and gate/up/down projections
+- protected or excluded modules such as `lm_head`, embeddings, and selected late/front layers
+- mixed-precision recipes such as W4/W8 module mixes, FP16 skip, and drop-last/layer-drop variants
+- sparse 2:4, rounding, and alternative low-bit method reviews
+
+This repository should describe those axes as explored design space. It should not rank individual variants by score unless the score source is labeled and safe to publish.
+
+## Calibration And Evaluation Loop
+
+The project used calibration and local-evaluation loops to decide which variants were worth submitting or investigating further. Internal notes mention multiple calibration-set versions, benchmark-derived calibration data, token-length filtering, sample-count changes, and local score-estimation notebooks.
+
+The public documentation separates:
+
+- calibration data construction from private/raw dataset release
+- local benchmark estimates from competition scores
+- failed or inconclusive variants from successful submission claims
+
 ## Fine-Tuning Track
 
-LoRA fine-tuning and data preprocessing were explored as an auxiliary path. Internal records mention open data preparation and dataset-format conversion experiments.
+LoRA fine-tuning, data preprocessing, and knowledge-distillation-style compression were explored as auxiliary paths. Internal records mention open data preparation, dataset-format conversion, DeepSeek-style formatting, CoT data generation, phase-specific datasets, block distillation, and KD on layer-dropped models.
 
 The public repository should document the workflow and lessons, but should not redistribute:
 
@@ -49,6 +72,7 @@ Reviewed public evidence includes:
 - OmniQuant/vLLM adaptation documentation
 - Runtime and wheel-build notes in reviewed repositories
 - Custom wheel packaging and submission-path investigation
+- editable-install and build-environment notes from local/Notion records
 
 Full upstream vLLM and OmniQuant source trees are intentionally excluded from the clean repository. Where useful, the public repo should keep patch-level references or links to reviewed commits/docs.
 

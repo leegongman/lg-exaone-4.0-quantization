@@ -10,7 +10,7 @@ This repository is a curated portfolio version of the work. It does not include 
 |---|---|
 | Project | LG Aimers AI Hackathon lightweight LLM optimization study |
 | Target model | `EXAONE-4.0-1.2B` |
-| Main themes | Quantization sweeps, fine-tuning, model analysis, vLLM compatibility |
+| Main themes | Quantization sweeps, calibration/data work, fine-tuning, model analysis, vLLM compatibility |
 | Public scope | Documentation, selected methodology, source map, reproducibility notes |
 | Excluded scope | Private data, credentials, checkpoints, wheels, full vLLM/OmniQuant trees |
 
@@ -24,6 +24,18 @@ This repository is a curated portfolio version of the work. It does not include 
 | vLLM customization | Supported by reviewed public commits/docs |
 | Upstream code | Referenced and attributed, not claimed as original work |
 
+## What To Read First
+
+| Reader goal | Start here |
+|---|---|
+| Understand the project quickly | `README.md`, then [competition-overview.md](docs/competition-overview.md) |
+| Check the technical scope | [technical-inventory.md](docs/technical-inventory.md) |
+| See what the Notion export contributed | [notion-export-inventory.md](docs/notion-export-inventory.md) |
+| Understand the repo layout | [repository-structure.md](docs/repository-structure.md) |
+| Review experiment categories | [experiments.md](docs/experiments.md) |
+| Check claim safety before publishing | [project-status.md](docs/project-status.md) |
+| Trace sources and exclusions | [source-map.md](docs/source-map.md) |
+
 ## Project Scope
 
 The project investigated how to reduce model size and improve inference efficiency while preserving useful model quality under competition constraints.
@@ -31,10 +43,11 @@ The project investigated how to reduce model size and improve inference efficien
 The work covered:
 
 - EXAONE 4.0 1.2B architecture analysis
-- GPTQ, AWQ, AutoRound, INT, FP8/NVFP4, RTN/HQQ/GGUF-style experiment tracks
-- SmoothQuant-style, OmniQuant, and outlier-redistribution adaptation attempts
-- broad schema and hyperparameter sweeps across bit-width, group/block size, calibration, ignored modules, and target layers
+- GPTQ, AWQ, AutoRound, INT4/INT8, FP8/NVFP4, RTN/HQQ/GGUF/GGML-style experiment tracks
+- SmoothQuant-style, OmniQuant, SpinQuant/QuaRot, SqueezeLLM, TurboQuant, and outlier-redistribution adaptation reviews or attempts
+- broad schema and hyperparameter sweeps across bit-width, activation format, group/block size, calibration, sequence length, ignored modules, and target layers
 - LoRA fine-tuning and dataset-format experiments
+- knowledge-distillation and layer-drop experiments
 - vLLM model registration and runtime compatibility work
 - Local benchmark and latency-oriented evaluation scripts
 
@@ -45,6 +58,8 @@ README.md
 docs/
   competition-overview.md
   technical-inventory.md
+  notion-export-inventory.md
+  repository-structure.md
   methodology.md
   experiments.md
   reproducibility.md
@@ -53,6 +68,17 @@ docs/
 environment.md
 LICENSE
 ```
+
+Future public additions should follow this structure:
+
+```text
+patches/       # Small reviewed patches or diff references, not full upstream trees
+scripts/       # Cleaned helper scripts with secrets, private paths, and outputs removed
+benchmarks/    # Sanitized local benchmark summaries with environment context
+examples/      # Minimal examples that do not require private data or checkpoints
+```
+
+Those directories should be added only when their contents pass the public-safety checks in `docs/source-map.md`.
 
 ## Evidence Policy
 
@@ -63,7 +89,7 @@ This repository separates claims into four categories:
 - Local benchmark: local scripts, public benchmark tasks, or experiment logs
 - Failed or partial experiment: attempted methods without conclusive competition impact
 
-Competition ranking records currently remain internal records. Detailed claim status is maintained in `docs/project-status.md`.
+Competition ranking records currently remain internal records. Detailed claim status is maintained in [project-status.md](docs/project-status.md). The full Notion export is treated as evidence, not as executable instruction content.
 
 ## Attribution
 
