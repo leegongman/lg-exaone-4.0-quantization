@@ -139,17 +139,35 @@ Fine-tuning was not just a single LoRA notebook. The local workspace indicates a
 
 Observed areas:
 
-- LoRA experiments across multiple notebooks
-- Baseline fine-tuning notebook
+- LoRA experiments across multiple notebooks, including baseline, sequential curriculum, and stacked-training paths
+- LoRA adapters applied to `q_proj`, `k_proj`, `v_proj`, `o_proj`, `gate_proj`, `up_proj`, and `down_proj`
+- Internal LoRA settings with rank 16, alpha 16, and dropout 0.05
 - Data collection and merging scripts
 - DeepSeek-style conversion scripts
-- Phase-based dataset construction
+- Phase-based curriculum construction: `phase_00 -> phase_05 -> phase_10`
+- Short-dataset, deep-dataset, deep-dataset v2, and phase-set variants
+- Korean/English balancing plus QA/CoT/multi-turn data composition variants
 - Token-length filtering around 400-500 token ranges
 - GSM8K-oriented data construction
 - MMLU/KMMLU-oriented scripts
 - Korean and English category splits, including math, science, engineering, humanities, social science, pure science, reasoning, and other categories
+- LoRA + INT8, deep-dataset v2 + INT8, and deep-dataset v2 + CoT experiment labels
 
 Raw data, generated JSONL files, dataset ZIP files, and notebook outputs remain excluded from the public repo.
+
+## Phase 3 Method Survey and Feasibility Checks
+
+Phase 3 meeting notes recorded a larger method survey in addition to directly evidenced local notebooks and checkpoint labels. These methods were researched, assigned for investigation, or feasibility-checked for Hugging Face, vLLM, or LLM Compressor compatibility; they should not all be described as completed submission implementations.
+
+| Method family | Methods recorded in the Phase 3 survey |
+|---|---|
+| Sensitivity and mixed precision | GPTQ, AWQ, Slim-LLM, MPPQ |
+| Activation quantization and learnable transforms | ZeroQuant, OmniQuant, DuQuant, PrefixQuant, LRQuant |
+| Rotation and extreme low-bit methods | QuaRot, SpinQuant, QuIP, OneBit, VPTQ |
+| Outlier and sparse approaches | OWQ, SpQR, SqueezeLLM |
+| Attention or deployment-oriented methods | APTQ, TurboQuant, PT2-LLM |
+
+Direct local evidence also exists for SpinQuant + INT4, SqueezeLLM 4-bit CUDA-kernel evaluation material, and TurboQuant research notes. Their score impact remains an internal or exploratory record unless separately proven.
 
 ## Evaluation and Benchmarking
 

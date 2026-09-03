@@ -60,6 +60,7 @@ The public repository must not include:
 |---|---|---|---|
 | Phase 2 rank | Notion/PDF; official leaderboard not yet attached | unverified internal record | Internal note fields record a Phase 2 ranking; this is pending official public verification. |
 | Phase 3 rank | Notion/PDF; official leaderboard not yet attached | unverified internal record | Internal note fields record a Phase 3 ranking; this is pending official public verification. |
+| Phase 1 progression | Internal postmortem PDF; organizer progression evidence not attached | unverified internal record | The postmortem describes completion of the Phase 1 foundational curriculum and progression to model optimization. |
 | Phase progression | Internal records plus official phase descriptions; official outcome page not yet attached | unverified internal record | Internal records describe progression through earlier phases and participation in the Phase 3 final-stage track. This is not a prize or verified leaderboard claim. |
 | Phase 2 score weighting | Internal postmortem PDF; organizer formula not attached | unverified internal record | The postmortem records `5 x accuracy + 5 x speed`; this is included as an internal evaluation record, not an official formula. |
 | Phase 3 score weighting | Internal postmortem PDF; organizer formula not attached | unverified internal record | The postmortem records `60 x accuracy + 20 x speed + 20 x model size`; this is included as an internal evaluation record, not an official formula. |

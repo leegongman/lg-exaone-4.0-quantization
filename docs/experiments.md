@@ -20,6 +20,7 @@ The same export includes 104 technical-note rows, 30 meeting-note rows, AWQ trac
 | SqueezeLLM / TurboQuant / ZeroQuant / OWQ / SpQR / Slim-LLM | Full Notion export | Reviewed or exploratory | Describe as reviewed/benchmarked only where supported; avoid claiming all were implemented |
 | FP16 skip / mixed precision | Public repo reference, notes, checkpoint labels | Partial | Describe as attempted variant |
 | LoRA fine-tuning | Full Notion export, local folder, notes | Partial | Document workflow; exclude raw data |
+| LoRA curriculum and stacked training | Local fine-tuning scripts, Notion LoRA notes, checkpoint labels | Partial | Document target modules, phase ordering, data-composition variants, and post-quantization combinations; exclude JSONL and outputs |
 | Knowledge distillation / layer drop | Full Notion export, local notebooks, checkpoint labels | Partial | Document as attempted compression path; exclude raw notebooks/data |
 | Data construction and formatting | Full Notion export, local fine-tuning scripts, generated dataset filenames, notes | Partial | Document categories and transformations; exclude raw JSONL/ZIP data |
 | Local benchmark | Scripts, docs, logs where available | Partial | Use only for local comparison |
@@ -55,6 +56,12 @@ The checkpoint labels include `Status`, `Score`, runtime, work-date, and submiss
 - numeric score/runtime fields should remain internal until cleaned and contextualized
 - competition-score claims require official leaderboard or organizer evidence
 - local benchmark tables require environment, task, hardware, and script context
+
+## Fine-Tuning Experiment Boundary
+
+The fine-tuning record contains more than one LoRA attempt: baseline, short-dataset, sequential `phase_00 -> phase_05 -> phase_10`, stacked, deep-dataset, deep-dataset v2, CoT, and INT8-combined paths. The reviewed LoRA notes target attention and MLP projections (`q/k/v/o`, `gate/up/down`) and record adapter settings such as rank 16, alpha 16, and dropout 0.05.
+
+These are attempt/configuration records, not a claim that a particular fine-tuned checkpoint improved official competition performance. Raw JSONL, generated datasets, notebooks, and checkpoint artifacts remain excluded.
 
 ## Local Benchmark Policy
 

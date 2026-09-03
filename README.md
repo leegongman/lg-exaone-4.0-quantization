@@ -6,6 +6,28 @@ The project began as model-side compression work and expanded into runtime engin
 
 > **Evidence boundary.** Competition rank values and the numeric score weightings below come from internal postmortem records and are not presented as organizer-verified results. Local benchmarks are not competition scores. See [docs/project-status.md](docs/project-status.md) for the claim table.
 
+## Competition Progress
+
+| Stage | Public wording | Evidence status |
+|---|---|---|
+| **Phase 1** | **PASS** - completed the foundational LLM compression curriculum and progressed to the model-optimization stage. | Unverified internal progression record |
+| **Phase 2** | **PASS** - completed the checkpoint-optimization stage and progressed to the Phase 3 selection/final-stage path. | Unverified internal progression record |
+| **Phase 3 (Final Stage)** | **ADVANCED TO FINAL STAGE** - competed with a checkpoint plus custom vLLM-engine work. | Unverified internal progression record |
+
+These labels describe project progression only. They are not prize, rank, or organizer-confirmed leaderboard claims.
+
+## Competition Overview
+
+The project was an `EXAONE-4.0-1.2B` lightweight-optimization challenge. The technical objective was to balance answer quality, inference speed, model size, and vLLM compatibility under a private evaluator.
+
+| Phase | Engineering focus | Submission surface | Internal score-weight record |
+|---|---|---|---|
+| **Phase 1** | Learn LLM quantization, fine-tuning, RLHF, knowledge distillation, pruning, and evaluation foundations. | Learning and qualification stage | Not applicable |
+| **Phase 2** | Produce a vLLM-compatible optimized checkpoint. | Quantized/optimized checkpoint | `5 x accuracy + 5 x speed` |
+| **Phase 3 (Final Stage)** | Optimize the checkpoint and customize the inference engine/model path. | Quantized checkpoint + custom vLLM wheel/model-engine artifact | `60 x accuracy + 20 x speed + 20 x model size` |
+
+The Phase 2/3 formulas are **unverified internal evaluation records** from the supplied postmortem PDF, not organizer-verified public formulas. The rule distinction and evidence boundary are expanded in [docs/competition-overview.md](docs/competition-overview.md).
+
 ## 1. Target Model: EXAONE 4.0 1.2B
 
 - **Model card:** [LGAI-EXAONE/EXAONE-4.0-1.2B](https://huggingface.co/LGAI-EXAONE/EXAONE-4.0-1.2B)
@@ -61,22 +83,48 @@ The project explored a broad search space rather than a single PTQ recipe. The t
 
 | Method family | Schemes, configurations, or combinations documented in the project |
 |---|---|
-| **GPTQ** | W4A16, W8A16, W8A8, W4A8; block-size and group-size sweeps; calibration-set/size sweeps; input-activation variants; sparse 2:4; KV-related variants; front/late-layer and selective-module precision; `down_proj`/`o_proj` protection. |
-| **AWQ** | W4A16, W8A16, W4A8, W8A4, W8A8; tensor/sequence-length variants; target-module maps; config groups; `lm_head`/`embed_tokens` exclusions; calibration and internal-parameter sweeps. |
-| **SmoothQuant combinations** | SQ + GPTQ, SQ + AWQ, SQ + INT8/FP8, and Pre-Identity-style scaling paths; EXAONE layer-map and vLLM compatibility were investigated. |
-| **OmniQuant** | EXAONE/vLLM adaptation work around LET, LWC, calibration, group size, learning rate, AMP behavior, activation scale/shift, packed representation, and runtime compatibility. |
-| **Rounding and low-bit methods** | AutoRound W4A16 and KV variants; RTN/RTN-XK; HQQ W4A16/W8A16; GGUF/GGML Q4; INT4 and INT8 tracks. |
-| **Advanced numeric formats** | FP8, FP8 dynamic, FP8 block, NVFP4, and mixed INT8/FP8 layer-ratio experiments. |
-| **Mixed precision and structure-aware compression** | FP16 skip, W4/W8 layer or module mixes, protected modules, layer drop/drop-last, block distillation, knowledge distillation, and sparse 2:4. |
-| **Fine-tuning path** | LoRA, short/deep/phase dataset variants, CoT-oriented data construction, answer-format normalization, token-length filtering, and post-fine-tuning quantization. |
+| **GPTQ** | W2/W4/W8 mixes; W4A16, W8A16, W8A8, W4A8; BLK32/BLK64; group-size sweeps; calibration-set/size sweeps; input-activation tensor/channel/token variants; sparse 2:4; KV-related variants; front/late-layer and selective-module precision; `down_proj`/`o_proj` protection; W4A16 late-W8 mixes. |
+| **AWQ** | W4A16, W8A16, W4A8, W8A4, W8A8; tensor variants; sequence lengths 256/512; prime variants; all-layer vs selective-layer recipes; W4/W8 and W4+FP16 mixes; target-module maps; config groups; `lm_head`/`embed_tokens` exclusions; calibration and internal-parameter sweeps. |
+| **SmoothQuant and pre-identity paths** | SQ + GPTQ W4A16/W8A16/W8A8, SQ + AWQ, SQ + INT8/FP8, and Pre-Identity scaling. These combinations required EXAONE layer-map and vLLM compatibility work. |
+| **OmniQuant** | EXAONE/vLLM adaptation around LET, LWC, W4A16 local work, W4A4/W4A8/W6A6-oriented configurations, calibration, group size, learning rate, AMP behavior, activation scale/shift, packed representation, and runtime compatibility. |
+| **Rounding and low-bit methods** | AutoRound W4A16/W8A16 and KV variants; RTN W4A16; RTN-XK W4A16; HQQ W4A16/W8A16; GGUF Q4; GGML Q4; direct INT4 and INT8 tracks. |
+| **Float and hybrid numeric formats** | PTQ FP8, FP8 dynamic, FP8 block, AWQ FP8 block, NVFP4, FP8/INT8 layer-ratio sweeps, and attention-vs-MLP format allocation. |
+| **Rotation, sparsity, and structural compression** | SpinQuant + INT4; sparse 2:4 for GPTQ/INT8/FP8; FP16 skip; W4/W8 layer/module mixes; protected modules; layer drop/drop-last; and INT8/FP8 layer-drop variants. |
+| **Post-training recovery** | LoRA, baseline fine-tuning, phase/curriculum data, CoT data, LoRA + INT8, block distillation, and knowledge distillation on layer-dropped models. |
 
 ### Researched or Feasibility-Checked Tracks
 
-The Phase 3 investigation also covered ZeroQuant, OWQ, SpQR, SqueezeLLM, Slim-LLM, TurboQuant, SpinQuant, QuaRot, DuQuant, PrefixQuant, LRQuant, QuIP, VPTQ, PT2-LLM, OneBit, MPPQ, and APTQ. Their public status varies by method: some were reviewed for vLLM/Hugging Face/LLM Compressor feasibility, while others reached local exploratory work. They are not all claimed as completed submission methods.
+The Phase 3 investigation additionally covered ZeroQuant, OWQ, SpQR, SqueezeLLM, Slim-LLM, TurboQuant, QuaRot, SpinQuant, DuQuant, PrefixQuant, LRQuant, QuIP, VPTQ, PT2-LLM, OneBit, MPPQ, and APTQ. Local artifacts additionally record SpinQuant-INT4, a SqueezeLLM 4-bit CUDA-kernel evaluation path, and a TurboQuant research track. The remaining methods are deliberately described as research or feasibility checks unless there is direct implementation evidence; they are not all claimed as completed submission methods.
 
 Detailed method evidence, including failed and partial work, is maintained in [docs/technical-inventory.md](docs/technical-inventory.md) and [docs/experiments.md](docs/experiments.md).
 
-## 3. Phase 2: Checkpoint Optimization Under Organizer Runtime
+## 3. Fine-Tuning, Data Construction, and Distillation
+
+Fine-tuning was an independent quality-recovery track, not a single LoRA trial. It was used to test whether output quality lost during compression could be recovered before reapplying quantization.
+
+### LoRA and Training Variants
+
+| Area | Documented work |
+|---|---|
+| LoRA target modules | `q_proj`, `k_proj`, `v_proj`, `o_proj`, `gate_proj`, `up_proj`, and `down_proj` |
+| Adapter configuration | Internal LoRA notes record `r=16`, `alpha=16`, and dropout `0.05`; these are experiment settings, not a recommended universal recipe. |
+| Training modes | Baseline fine-tuning, sequential curriculum training, stacked training, short-dataset variants, deep-dataset variants, and phase-set variants. |
+| Curriculum path | `phase_00 -> phase_05 -> phase_10`, moving from short/simple QA through intermediate reasoning toward longer reasoning and answer formats. |
+| Data construction | Public-data collection/merge scripts, Korean/English balancing, subject-category splits, DeepSeek-style answer-format conversion, QA/CoT/multi-turn mixes, and token-length filtering. |
+| Quantization combination | LoRA + INT8, deep-dataset v2 + INT8, and deep-dataset v2 + CoT checkpoint labels are recorded as experiment attempts. |
+
+The phase datasets used multiple scale/composition variants, including sequential 1,200/1,000/1,000-sample stages, expanded 1,800/1,400/1,400 stages, and a stacked 12,000-sample path. These are internal experiment settings only; raw JSONL data and notebook outputs are intentionally excluded.
+
+### Distillation and Layer Compression
+
+- **Block distillation:** attempted to replace the final two decoder layers with a distilled single layer.
+- **Knowledge distillation:** teacher/student and logit/hidden-state supervision paths were explored.
+- **KD on a layer-dropped model:** tested compression after removing decoder capacity.
+- **Fine-tune then quantize:** treated fine-tuning as a candidate recovery step before INT8 or other quantization paths.
+
+This work is reported as partial/attempted. Local score estimates, dataset contents, and failed checkpoints are not presented as official competition performance.
+
+## 4. Phase 2: Checkpoint Optimization Under Organizer Runtime
 
 The official [Phase 2 competition page](https://dacon.io/competitions/official/236673/overview/description) frames the task as optimizing `EXAONE-4.0-1.2B` for lightweight inference and submitting final model weights for hidden evaluation. In this project, Phase 2 was the checkpoint-focused stage: the model had to be compatible with the organizer's vLLM-based runtime, but a participant-customized runtime wheel was not part of the documented submission surface.
 
@@ -96,7 +144,7 @@ The official [Phase 2 competition page](https://dacon.io/competitions/official/2
 - Added LoRA fine-tuning, data-format normalization, and knowledge-distillation paths once quantization alone appeared insufficient.
 - Compared local `lm-eval`-style quality signals and latency-oriented measurements, while documenting that they did not reliably predict the private evaluation result.
 
-## 4. Phase 3 (Final Stage): Custom vLLM Engine and Model-Path Work
+## 5. Phase 3 (Final Stage): Custom vLLM Engine and Model-Path Work
 
 The official [Phase 3 competition page](https://dacon.io/competitions/official/236689/overview/description) adds a model-engine submission surface, including a vLLM wheel, and includes code review. That changed the work from checkpoint-only optimization to checkpoint-plus-runtime integration.
 

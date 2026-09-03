@@ -10,6 +10,12 @@ The project narrative is supported by reviewed local materials, internal notes, 
 
 The official competition pages establish task and submission scope. The numerical weightings below come from the project's supplied postmortem PDF and are therefore recorded as **unverified internal evaluation records**, not organizer-verified formulas. They are included to explain the engineering decisions, not to make a public score claim.
 
+## Phase 1: Foundation and Progression
+
+The supplied postmortem describes Phase 1 as the online foundational stage covering LLM quantization, fine-tuning, RLHF, knowledge distillation, pruning, and related AI concepts. Internal project records describe completion of this stage and progression to the EXAONE model-optimization work.
+
+This repository uses the wording **"Phase 1 PASS"** only as an unverified internal progression record, not as a published organizer result.
+
 ## Phase 2: Model Optimization Under Organizer Runtime
 
 The Phase 2 page frames the task as optimizing `EXAONE-4.0-1.2B` for inference quality and lightweight deployment, then evaluating final model weights against a hidden test set. The published rules allow use of publicly disclosed datasets and preprocessing, while the organizer controls the private evaluation setup.
