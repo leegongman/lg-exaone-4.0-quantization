@@ -175,19 +175,26 @@ The critical distinction is architectural: these are **new hidden-state scaling 
 
 ## Repository Guide
 
+The source-selection rules for the project's prior EXAONE and vLLM repositories are documented in [file-selection-plan.md](docs/file-selection-plan.md). The reviewed EXAONE/OmniQuant and vLLM implementation deltas are preserved as focused, attributed patches rather than copied source trees; [repository-consolidation.md](docs/repository-consolidation.md) records exactly how each former repository is represented.
+
 ```text
 docs/          Competition rules, architecture, experiments, evidence, and safety
-techniques/    Future method-specific notes with evidence and attribution
-configs/       Future sanitized configuration examples
+techniques/    Method-specific notes with evidence and attribution
+configs/       Sanitized configuration examples
 experiments/   Future sanitized manifests and local benchmark summaries
-patches/       Small license-reviewed patch references only
-scripts/       Future cleaned helpers without private paths, data, or credentials
+patches/       License-attributed EXAONE/OmniQuant and vLLM source deltas
+scripts/       Cleaned helpers without private paths, data, or credentials
 ```
 
 - [Competition overview](docs/competition-overview.md): Phase rules, evaluation boundary, and result terminology.
 - [Model architecture](docs/model-architecture.md): EXAONE structure, target modules, and the custom vLLM decoder path.
 - [Technical inventory](docs/technical-inventory.md): full technique classification and source levels.
+- [Technique notes](techniques/README.md): GPTQ, AWQ, OmniQuant, SmoothQuant, mixed precision, fine-tuning, distillation, and vLLM runtime work.
 - [Experiments](docs/experiments.md): attempted, partial, failed, local, and official-result policy.
+- [File selection plan](docs/file-selection-plan.md): admission rules for prior EXAONE/vLLM repositories and permanent exclusions.
+- [Repository consolidation](docs/repository-consolidation.md): former-repository commits, preserved changes, and exclusions.
+- [Patches](patches/README.md): the focused source deltas and exact upstream bases.
+- [Third-party licenses](THIRD_PARTY_LICENSES.md): upstream licenses applicable to patch files.
 - [Source map](docs/source-map.md): upstream attribution and the public include/exclude manifest.
 
 ## Public Safety and Attribution

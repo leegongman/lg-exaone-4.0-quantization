@@ -1,0 +1,34 @@
+# Sanitized documentation example. This records an attempted track, not a result.
+schema_version: 1
+experiment_id: gptq-w4a16-example
+status: attempted
+method_family: gptq
+evidence_level: reviewed-local-evidence
+public_summary: >-
+  Illustrative GPTQ W4A16 track with attention and MLP projection targeting.
+  No calibration data, checkpoint, score, runtime log, or submission artifact is distributed.
+target_modules:
+  - q_proj
+  - k_proj
+  - v_proj
+  - o_proj
+  - gate_proj
+  - up_proj
+  - down_proj
+quantization:
+  weight_bits: 4
+  activation_bits: 16
+  group_size: 128
+calibration:
+  data_status: not-distributed
+  sample_count: null
+  sequence_length: null
+runtime:
+  engine: vllm
+  artifact_status: not-distributed
+results:
+  classification: not-published
+  note: Local results are intentionally omitted and are not official competition scores.
+source_refs:
+  - docs/technical-inventory.md
+  - techniques/gptq-awq.md

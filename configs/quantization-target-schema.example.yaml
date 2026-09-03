@@ -1,0 +1,34 @@
+# Illustrative public schema. This is not a checkpoint config, submission recipe,
+# or a verified best-performing setting.
+schema_version: 1
+status: example-only
+model:
+  family: EXAONE-4.0-1.2B
+quantization:
+  method_family: gptq-or-awq
+  default_weight_bits: 4
+  default_activation_bits: 16
+  group_size: 128
+  protected_modules:
+    - lm_head
+    - embed_tokens
+targets:
+  attention:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+  mlp:
+    - gate_proj
+    - up_proj
+    - down_proj
+mixed_precision_overrides: []
+calibration:
+  source: private-or-public-data-not-distributed-here
+  sample_count: null
+  sequence_length: null
+runtime:
+  target: vllm
+notes:
+  - Replace placeholders only with reviewed, public-safe values.
+  - Keep data paths, checkpoint paths, tokens, artifacts, and scores out of this file.

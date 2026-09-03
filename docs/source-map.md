@@ -21,6 +21,7 @@ This document maps the evidence used to build the clean public repository. It al
 | DACON Phase 2 | [competition description](https://dacon.io/competitions/official/236673/overview/description) | Official task framing, hidden evaluation, model-weight submission path, public-data allowance | Link and paraphrase only; no private score or leaderboard export included |
 | DACON Phase 3 | [competition description](https://dacon.io/competitions/official/236689/overview/description) | Final-stage eligibility, code-review context, model-engine/vLLM-wheel submission allowance | Link and paraphrase only; no private score or leaderboard export included |
 | EXAONE 4.0 1.2B | [Hugging Face model card](https://huggingface.co/LGAI-EXAONE/EXAONE-4.0-1.2B) | Canonical public model reference, loading context, and official EXAONE logo rendered remotely in the README | Reference link only; weights and model artifacts excluded |
+| OpenGVLab OmniQuant | [upstream repository](https://github.com/OpenGVLab/OmniQuant) | Upstream algorithm and local-clone provenance for OmniQuant adaptation work | External dependency only; full source tree excluded |
 
 ## Reviewed Public GitHub Sources
 
@@ -28,11 +29,26 @@ This document maps the evidence used to build the clean public repository. It al
 |---|---:|---|---|
 | `leegongman/scheme_vLLM_omniquant` | Yes | [repo](https://github.com/leegongman/scheme_vLLM_omniquant), [modified files](https://github.com/leegongman/scheme_vLLM_omniquant/blob/main/docs/MODIFIED_FILES.md), [checkpoint generation](https://github.com/leegongman/scheme_vLLM_omniquant/blob/main/docs/CHECKPOINT_GENERATION.md), [wheel build](https://github.com/leegongman/scheme_vLLM_omniquant/blob/main/docs/WHEEL_BUILD.md) | OmniQuant/vLLM adaptation docs, modified-file map, checkpoint-generation notes, wheel-build notes |
 | `leegongman/EXAONE_Quantization_method` | Yes | [repo](https://github.com/leegongman/EXAONE_Quantization_method), [setup notes](https://github.com/leegongman/EXAONE_Quantization_method/blob/main/SETUP.md) | Setup notes, environment context, local benchmark context |
-| `leegongman/vLLM_Speed` | Yes | [repo](https://github.com/leegongman/vLLM_Speed) | Upstream OmniQuant baseline/reference only |
-| `leegongman/vLLM_FP16_skip` | Yes | [repo](https://github.com/leegongman/vLLM_FP16_skip) | FP16 skip variant reference only |
-| `leegongman/vllm` | Yes | [repo](https://github.com/leegongman/vllm), [EXAONE SQ registration commit](https://github.com/leegongman/vllm/commit/d0d38db63090185dfb8ca131def8d04146de9e5e), [weight-name fix commit](https://github.com/leegongman/vllm/commit/d8fe813d6715869fa85471e5a3d3631c599b7e72) | EXAONE SmoothQuant-style model registration and related commits |
-| `leegongman/vLLM_OmniQuant` | No | [repo link not reviewed](https://github.com/leegongman/vLLM_OmniQuant) | Not reviewed; not used |
-| `leegongman/vllm-exaone-sq` | No | [repo link not reviewed](https://github.com/leegongman/vllm-exaone-sq) | Not reviewed; not used |
+| `leegongman/CP` | Yes | [repo](https://github.com/leegongman/CP), reviewed commit `ea6bcaba99703fbe82c09ddb84b408001b43eadb` | Canonical source snapshot used to extract the focused EXAONE OmniQuant and vLLM activation-real deltas |
+| `leegongman/vLLM_Speed` | Yes | [repo](https://github.com/leegongman/vLLM_Speed), reviewed commit `f70db19b276ab8ca4707c6825b7d440dd39bb9b4` | Earlier EXAONE layer revision preserved as a historical patch; local performance outputs excluded |
+| `leegongman/vLLM_FP16_skip` | Yes | [repo](https://github.com/leegongman/vLLM_FP16_skip), reviewed commit `fd6f373b17aadfeaadb027beecff4c7294c850ca` | Full vLLM snapshot reviewed; no isolated FP16-skip delta identified, so source tree excluded |
+| `leegongman/vllm` | Yes | [repo](https://github.com/leegongman/vllm), [EXAONE SQ registration commit](https://github.com/leegongman/vllm/commit/d0d38db63090185dfb8ca131def8d04146de9e5e), [weight-name fix commit](https://github.com/leegongman/vllm/commit/d8fe813d6715869fa85471e5a3d3631c599b7e72) | Fork used as provenance for the EXAONE SmoothQuant model-path patch; full fork excluded |
+| `leegongman/vLLM_OmniQuant` | Yes | [repo](https://github.com/leegongman/vLLM_OmniQuant), reviewed commit `7c96a51b71d62c6a19fd99b8a06c59d932df6566` | Split custom-wheel archive reviewed; wheel excluded, corresponding source delta retained from the CP snapshot |
+| `leegongman/vllm-exaone-sq` | Yes | [repo](https://github.com/leegongman/vllm-exaone-sq), reviewed commit `17411cee9275e317b6674c8190c2a88cd4a56e46` | Private snapshot used to preserve the EXAONE SmoothQuant model-path patch |
+
+## Cleaned Public Files Derived From Reviewed Evidence
+
+| Public file | Evidence source | Handling |
+|---|---|---|
+| `scripts/benchmark_vllm_tpt.py` | Local `norm_speed.py` reviewed in the original workspace | Reconstructed as a synthetic-prompt, single-model local benchmark utility; no dataset, score, path, credential, or original result is carried over |
+| `patches/omniquant-exaone/` | `CP` source snapshot; duplicate evidence from `scheme_vLLM_omniquant` and `EXAONE_Quantization_method`; OpenGVLab OmniQuant base | Minimal EXAONE OmniQuant delta, plus the earlier `vLLM_Speed` layer revision; full OmniQuant tree excluded |
+| `patches/vllm-omni-activation-real/` | `CP` source snapshot and reviewed `vLLM_OmniQuant` wheel archive; vLLM `v0.14.1` base | Minimal vLLM activation-real runtime delta; wheel and full vLLM tree excluded |
+| `patches/vllm-exaone-sq/` | [EXAONE SQ registration commit](https://github.com/leegongman/vllm/commit/d0d38db63090185dfb8ca131def8d04146de9e5e) and reviewed `vllm-exaone-sq` snapshot | Minimal `Exaone4ForCausalLMSQ` model-path delta; full vLLM tree excluded |
+| `patches/vllm-fp16-skip/` | Reviewed `vLLM_FP16_skip` snapshot | Consolidation record plus a selected earlier `omni_activation_real` runtime source; no unverified FP16-skip implementation is asserted |
+| `patches/vllm-exaone-sq-reference.md` | [EXAONE SQ registration commit](https://github.com/leegongman/vllm/commit/d0d38db63090185dfb8ca131def8d04146de9e5e) and [weight-name fix commit](https://github.com/leegongman/vllm/commit/d8fe813d6715869fa85471e5a3d3631c599b7e72) | Companion provenance note for the source patch |
+| `techniques/*.md` | Local workspace, full Notion export, supplied PDF, and reviewed public repositories | Project-owned summaries of technical scope; each note distinguishes attempted, partial, exploratory, and external work |
+| `configs/quantization-target-schema.example.yaml` | Reviewed local quantized-model configuration and method notes | Reconstructed illustrative schema; no raw configuration dump, checkpoint reference, or private value is copied |
+| `experiments/gptq-w4a16.example.yaml` and `schemas/experiment-manifest.schema.json` | Reviewed local GPTQ configuration evidence and public-status rules | Score-free example manifest and metadata-only schema; no raw experiment result, data, checkpoint, or submission field is copied |
 
 ## Attribution Rule
 
@@ -44,6 +60,8 @@ If implementation evidence is needed, prefer:
 - Small patch files
 - Minimal excerpts with license-compatible attribution
 - Documentation summaries
+
+The repository-specific eligibility and destination rules are maintained in [file-selection-plan.md](file-selection-plan.md). The complete former-repository disposition is maintained in [repository-consolidation.md](repository-consolidation.md). First-party changes are preserved only as focused patches with the upstream base and applicable upstream license; source snapshots are not vendored.
 
 ## Clean Repo Manifest
 
@@ -60,19 +78,42 @@ If implementation evidence is needed, prefer:
 - `docs/reproducibility.md`
 - `docs/project-status.md`
 - `docs/source-map.md`
+- `docs/file-selection-plan.md`
+- `docs/repository-consolidation.md`
 - `.gitignore`
 - `LICENSE`
 - `environment.md`
 - `assets/README.md`
 - `configs/README.md`
+- `configs/quantization-target-schema.example.yaml`
 - `examples/README.md`
 - `experiments/README.md`
+- `experiments/gptq-w4a16.example.yaml`
 - `patches/README.md`
+- `patches/omniquant-exaone/README.md`
+- `patches/omniquant-exaone/0001-exaone-v4-omniquant-adaptation.patch`
+- `patches/omniquant-exaone/legacy/0000-vllm-speed-exaone4-layer-v1.patch`
+- `patches/vllm-omni-activation-real/README.md`
+- `patches/vllm-omni-activation-real/0001-v0.14.1-omni-activation-real-runtime.patch`
+- `patches/vllm-exaone-sq/README.md`
+- `patches/vllm-exaone-sq/0001-exaone-sq-model-path.patch`
+- `patches/vllm-fp16-skip/README.md`
+- `patches/vllm-fp16-skip/legacy/omni_activation_real.py`
+- `patches/licenses/OmniQuant-MIT.txt`
+- `patches/licenses/vLLM-Apache-2.0.txt`
+- `THIRD_PARTY_LICENSES.md`
 - `schemas/README.md`
+- `schemas/experiment-manifest.schema.json`
 - `scripts/README.md`
+- `scripts/benchmark_vllm_tpt.py`
 - `techniques/README.md`
+- `techniques/gptq-awq.md`
+- `techniques/omniquant-smoothquant.md`
+- `techniques/low-bit-and-mixed-precision.md`
+- `techniques/fine-tuning-and-distillation.md`
+- `techniques/vllm-runtime.md`
+- `patches/vllm-exaone-sq-reference.md`
 - Optional cleaned scripts after review
-- Optional patch/reference files after license review
 
 ### Exclude
 

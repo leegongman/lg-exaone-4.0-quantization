@@ -2,7 +2,7 @@
 
 ## Design Goal
 
-This public repository follows a conventional research-project layout: durable documentation at the center, with separate directories for future configurations, techniques, experiments, scripts, examples, assets, schemas, and small patches. It is intentionally not a monolithic dump of the original workspace.
+This public repository follows a conventional research-project layout: durable documentation at the center, with separate directories for configurations, techniques, experiments, scripts, examples, assets, schemas, and small patches. It is intentionally not a monolithic dump of the original workspace.
 
 The directory convention is informed by the structure of the project's [NVIDIA Nemotron reasoning repository](https://github.com/leegongman/nvidia-nemotron-reasoning), adapted for this project's safety boundary and attribution requirements.
 
@@ -12,6 +12,7 @@ The directory convention is informed by the structure of the project's [NVIDIA N
 README.md
 environment.md
 LICENSE
+THIRD_PARTY_LICENSES.md
 docs/
   competition-overview.md
   model-architecture.md
@@ -23,25 +24,53 @@ docs/
   project-status.md
   source-map.md
   repository-structure.md
+  file-selection-plan.md
+  repository-consolidation.md
 assets/
   README.md
 configs/
   README.md
+  quantization-target-schema.example.yaml
 examples/
   README.md
 experiments/
   README.md
+  gptq-w4a16.example.yaml
 patches/
   README.md
+  licenses/
+    OmniQuant-MIT.txt
+    vLLM-Apache-2.0.txt
+  omniquant-exaone/
+    README.md
+    0001-exaone-v4-omniquant-adaptation.patch
+    legacy/0000-vllm-speed-exaone4-layer-v1.patch
+  vllm-omni-activation-real/
+    README.md
+    0001-v0.14.1-omni-activation-real-runtime.patch
+  vllm-exaone-sq/
+    README.md
+    0001-exaone-sq-model-path.patch
+  vllm-fp16-skip/
+    README.md
+    legacy/omni_activation_real.py
+  vllm-exaone-sq-reference.md
 schemas/
   README.md
+  experiment-manifest.schema.json
 scripts/
   README.md
+  benchmark_vllm_tpt.py
 techniques/
   README.md
+  gptq-awq.md
+  omniquant-smoothquant.md
+  low-bit-and-mixed-precision.md
+  fine-tuning-and-distillation.md
+  vllm-runtime.md
 ```
 
-The directory guides are deliberate placeholders. They establish stable homes for reviewed public content without prematurely publishing code, model artifacts, or raw internal files.
+The directory guides establish stable homes for reviewed public content and future additions without prematurely publishing model artifacts or raw internal files.
 
 ## Directory Roles
 
@@ -51,21 +80,19 @@ The directory guides are deliberate placeholders. They establish stable homes fo
 | `environment.md` | Reference tool-family notes | Not an install lockfile; use pinned versions only after verification |
 | `docs/` | Evidence-based methodology, architecture, scope, status, and provenance | Link to sources and label evidence level |
 | `assets/` | Recreated public diagrams and sanitized figures | No screenshots with private or personally identifying information |
-| `configs/` | Minimal, sanitized configuration examples | No raw checkpoint/model/tokenizer configuration or private paths |
+| `configs/` | Minimal, sanitized configuration examples | Includes an illustrative target schema only; no raw checkpoint/model/tokenizer configuration or private paths |
 | `examples/` | Small runnable or conceptual examples | No credentials, private data, checkpoints, or wheels |
-| `experiments/` | Sanitized experiment manifests and result summaries | Every metric must state whether it is official, internal, local, failed, partial, or exploratory |
-| `patches/` | Small license-reviewed diffs and commit references | No full vLLM, OmniQuant, AWQ, or other upstream tree |
-| `schemas/` | Versioned schemas for public manifests/configs | Metadata only; no submission payloads or secrets |
-| `scripts/` | Cleaned helper scripts | No DACON API/token code, local absolute paths, generated datasets, or copied upstream sources |
-| `techniques/` | Method-specific notes | Link to source/evidence and distinguish implementation from research review |
+| `experiments/` | Sanitized experiment manifests and result summaries | Includes a score-free GPTQ manifest example; every metric must state whether it is official, internal, local, failed, partial, or exploratory |
+| `patches/` | License-attributed EXAONE OmniQuant and vLLM source deltas, plus provenance records | Exact upstream base, source revision, license, and exclusions are required; no full upstream tree |
+| `schemas/` | Versioned schemas for public manifests/configs | Includes a sanitized experiment-manifest schema; metadata only, no submission payloads or secrets |
+| `scripts/` | Cleaned helper scripts | Includes synthetic-prompt local timing only; no DACON API/token code, local absolute paths, generated datasets, or copied upstream sources |
+| `techniques/` | Method-specific notes | Contains project-owned method summaries that link to evidence and distinguish implementation from research review |
 
-## Recommended Growth Order
+## Next Intake Priorities
 
-1. Add sanitized `techniques/` notes for GPTQ, AWQ, SmoothQuant, OmniQuant, LoRA, and vLLM integration.
-2. Add one `configs/` example only after it is reconstructed from safe public fields rather than copied from a checkpoint artifact.
-3. Add one `experiments/` manifest that captures method, target modules, calibration metadata, local hardware, and evidence status without scores or private data.
-4. Add small `patches/` references to the reviewed vLLM commits after license/base-revision metadata is recorded.
-5. Add cleaned `scripts/` only after a credential, path, data, and license scan.
+1. Add only new, independently reviewed self-authored deltas to the existing patch packages.
+2. Add sanitized, score-free experiment manifests when their metadata can be separated from private data and submission artifacts.
+3. Pin an environment only after a fresh compatible vLLM/OmniQuant build has been independently reproduced.
 
 ## Excluded Structure
 
@@ -77,4 +104,4 @@ The following must not be recreated in this repository:
 - Raw notebooks, notebook outputs, and raw Notion export trees
 - Private datasets, generated JSONL, raw CSV/XLSX, PDFs, screenshots, or leaderboard exports
 
-The exact include/exclude manifest is maintained in [source-map.md](source-map.md).
+The exact include/exclude manifest is maintained in [source-map.md](source-map.md). The intake order and repository-by-repository selection rules are maintained in [file-selection-plan.md](file-selection-plan.md).
