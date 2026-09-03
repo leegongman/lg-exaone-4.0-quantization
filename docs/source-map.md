@@ -20,7 +20,7 @@ This document maps the evidence used to build the clean public repository. It al
 |---|---|---|---|
 | DACON Phase 2 | [competition description](https://dacon.io/competitions/official/236673/overview/description) | Official task framing, hidden evaluation, model-weight submission path, public-data allowance | Link and paraphrase only; no private score or leaderboard export included |
 | DACON Phase 3 | [competition description](https://dacon.io/competitions/official/236689/overview/description) | Final-stage eligibility, code-review context, model-engine/vLLM-wheel submission allowance | Link and paraphrase only; no private score or leaderboard export included |
-| EXAONE 4.0 1.2B | [Hugging Face model card](https://huggingface.co/LGAI-EXAONE/EXAONE-4.0-1.2B) | Canonical public model reference and loading context | Reference link only; weights and model artifacts excluded |
+| EXAONE 4.0 1.2B | [Hugging Face model card](https://huggingface.co/LGAI-EXAONE/EXAONE-4.0-1.2B) | Canonical public model reference, loading context, and official EXAONE logo rendered remotely in the README | Reference link only; weights and model artifacts excluded |
 
 ## Reviewed Public GitHub Sources
 
