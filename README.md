@@ -4,7 +4,7 @@
   </a>
 </p>
 
-# LG Aimers: EXAONE 4.0 1.2B Quantization and vLLM Optimization
+# LG : EXAONE 4.0 1.2B Quantization and vLLM Optimization
 
 A competition-driven study of how to quantize, adapt, and serve [EXAONE 4.0 1.2B](https://huggingface.co/LGAI-EXAONE/EXAONE-4.0-1.2B) under private evaluation constraints.
 
